@@ -20,7 +20,6 @@
         # pkgs.neovim
         pkgs.poetry
         pkgs.ripgrep
-        pkgs.tree-sitter
 
         # # It is sometimes useful to fine-tune packages, for example, by applying
         # # overrides. You can do that directly here, just don't forget the
@@ -53,7 +52,7 @@
 
     home.sessionVariables = {
         AWS_SDK_LOAD_CONFIG = "1";
-        AWS_PAGER = ''sh -c 'in=$\$(cat);echo $$in | jq 2> /dev/null || echo $$in' '';
+        # AWS_PAGER = ''sh -c 'in=$\$(cat);echo $$in | jq 2> /dev/null || echo $$in' '';
         # AWS_PAGER = "jq -rR 'fromjson? // .'";
         MANPAGER = ''sh -c 'col -bx | bat --pager \"less -RF\" -l man -p' '';
         TERMINAL = "kitty";
@@ -119,32 +118,18 @@
         source = ./fish/functions;
         recursive = true;
     };
+    xdg.configFile."fish/completions" = {
+        source = ./fish/completions;
+        recursive = true;
+    };
 
 
     programs.neovim = {
         enable = true;
         viAlias = true;
         vimAlias = true;
-
         extraPackages = [
-            pkgs.tree-sitter
-            pkgs.tree-sitter-grammars.tree-sitter-go
-            pkgs.tree-sitter-grammars.tree-sitter-python
+            pkgs.gcc
         ];
-
-        plugins = [
-           pkgs.vimPlugins.nvim-treesitter.withAllGrammars
-           # (pkgs.vimPlugins.nvim-treesitter.withPlugins (p: [p.go p.hcl p.vim p.lua p.terraform p.python]))
-         ];
     };
-
-    # xdg.configFile = {
-    #     "nvim/lua/init-ts.lua".text = ''
-    #         -- Add Treesitter Plugin Path
-    #         vim.opt.runtimepath:append("${(pkgs.vimPlugins.nvim-treesitter.withPlugins (p: [p.go p.hcl p.vim p.lua p.terraform p.python]))}")
-    #         -- Add Treesitter Parsers Path
-    #
-    #         require('start')
-    #         '';
-    # };
 }
