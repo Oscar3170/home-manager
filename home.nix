@@ -123,6 +123,11 @@
         recursive = true;
     };
 
+    xdg.configFile."kitty" = {
+        source = ./kitty;
+        recursive = true;
+    };
+
 
     programs.neovim = {
         enable = true;
