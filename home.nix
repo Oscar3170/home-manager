@@ -1,3 +1,4 @@
+# vim: sw=4
 { config, pkgs, ... }:
 
 {
@@ -13,7 +14,7 @@
     # You should not change this value, even if you update Home Manager. If you do
     # want to update the value, then make sure to first check the Home Manager
     # release notes.
-    home.stateVersion = "23.05"; 
+    home.stateVersion = "23.05";
 
     home.packages = [
         pkgs.kops
@@ -21,11 +22,7 @@
         pkgs.poetry
         pkgs.ripgrep
 
-        # # It is sometimes useful to fine-tune packages, for example, by applying
-        # # overrides. You can do that directly here, just don't forget the
-        # # parentheses. Maybe you want to install Nerd Fonts with a limited number of
-        # # fonts?
-        # (pkgs.nerdfonts.override { fonts = [ "FantasqueSansMono" ]; })
+				(pkgs.nerdfonts.override { fonts = [ "DejaVuSansMono" ]; })
 
         # # You can also create simple shell scripts directly inside your
         # # configuration. For example, this adds a command 'my-hello' to your
@@ -35,22 +32,9 @@
         # '')
     ];
 
-    # Home Manager is pretty good at managing dotfiles. The primary way to manage
-    # plain files is through 'home.file'.
-    home.file = {
-        # # Building this configuration will create a copy of 'dotfiles/screenrc' in
-        # # the Nix store. Activating the configuration will then make '~/.screenrc' a
-        # # symlink to the Nix store copy.
-        # ".screenrc".source = dotfiles/screenrc;
-
-        # # You can also set the file content immediately.
-        # ".gradle/gradle.properties".text = ''
-        #   org.gradle.console=verbose
-        #   org.gradle.daemon.idletimeout=3600000
-        # '';
-    };
-
     home.sessionVariables = {
+				NIX_PATH = "$HOME/.nix-defexpr/channels:$HOME/.nix-defexpr/channels_root";
+
         AWS_SDK_LOAD_CONFIG = "1";
         # AWS_PAGER = ''sh -c 'in=$\$(cat);echo $$in | jq 2> /dev/null || echo $$in' '';
         # AWS_PAGER = "jq -rR 'fromjson? // .'";
@@ -102,7 +86,7 @@
         { name = "foreign-env"; src = pkgs.fishPlugins.foreign-env.src; }
         { name = "done"; src = pkgs.fishPlugins.done.src; }
 
-        { 
+        {
             name = "kubectl-completions";
             src = pkgs.fetchFromGitHub {
                 owner = "evanlucas";
@@ -127,6 +111,43 @@
         source = ./kitty;
         recursive = true;
     };
+
+		programs.kitty = {
+				enable = false;
+
+				font = {
+						size = 11;
+						name = "DejaVuSansMono";
+						package = (pkgs.nerdfonts.override { fonts = [ "DejaVuSansMono" ]; });
+				};
+				settings = {
+						"scrollback_lines" = 50000;
+
+						"background_tint" = 5;
+						"background_opacity" = "0.97";
+						"dynamic_background_opacity" = true;
+
+						"touch_scroll_multiplier" = 6;
+						"linux_display_manager" = "wayland";
+						"wayland_titlebar_color" = "background";
+				};
+				shellIntegration = {
+						mode = "no-cursor";
+						enableFishIntegration = true;
+				};
+				keybindings = {
+						"ctrl+alt+enter" = "launch";
+						"ctrl+shift+enter" = "launch --cwd=current";
+						"ctrl+shift+n" = "launch --cwd=current --type os-window";
+
+						# Layouts
+						"ctrl+shift+l" = "next_layout";
+						"ctrl+shift+r" = "start_resizing_window";
+
+						# SSH
+						"ctrl+shift+alt+p" = "close_shared_ssh_connections";
+				};
+		};
 
 
     programs.neovim = {
