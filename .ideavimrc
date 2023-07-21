@@ -1,0 +1,37 @@
+set clipboard+=unnamed
+
+set number
+set relativenumber
+let mapleader = " "
+
+Plug 'vim-scripts/ReplaceWithRegister'
+
+map <leader>ee <Action>(ShowErrorDescription)
+map <leader>en <Action>(GotoNextError)
+map <leader>ep <Action>(GotoPreviousError)
+map <leader>/ <Action>(CommentByLineComment)
+map <leader>ca <Action>(ShowIntentionActions)
+map <leader>rn <Action>(RenameElement)
+map <leader>fm <Action>(ReformatCode)
+
+" Find actions
+map <leader>fz <Action>(Find)
+map <leader>fa <Action>(FindInPath)
+map <leader>ff <Action>(GotoFile)
+map <leader>fs <Action>(GotoSymbol)
+
+
+" Run / Debug
+map <leader>r <Action>(Run)
+map <leader>R <Action>(RunClass)
+map <leader>cr <Action>(ChooseRunConfiguration)
+map <leader>dd <Action>(Debug)
+map <leader>dD <Action>(DebugClass)
+map <leader>ds <Action>(Stop)
+map <leader>dr <Action>(Resume)
+map <leader>do <Action>(StepOver)
+map <leader>dsi <Action>(StepInto)
+map <leader>dsI <Action>(StepIntoMyCode)
+map <leader>dso <Action>(StepOut)
+map <leader>db <Action>(ToggleLineBreakpoint)
+map <leader>dtb <Action>(ToggleTemporaryLineBreakpoint)

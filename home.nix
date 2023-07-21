@@ -133,8 +133,12 @@
         enable = true;
         viAlias = true;
         vimAlias = true;
-        extraPackages = [
-            pkgs.gcc
-        ];
     };
+
+    xdg.configFile."nvim" = {
+        source = ./nvim;
+        recursive = true;
+    };
+
+    home.file.".ideavimrc".source = ./.ideavimrc;
 }
