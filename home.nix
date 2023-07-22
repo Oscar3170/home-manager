@@ -18,11 +18,16 @@
 
     home.packages = [
         pkgs.kops
-        # pkgs.neovim
         pkgs.poetry
+
+        pkgs.fd
         pkgs.ripgrep
 
-				(pkgs.nerdfonts.override { fonts = [ "DejaVuSansMono" ]; })
+        pkgs.gopls
+        pkgs.pyright
+        pkgs.lua-language-server
+
+        (pkgs.nerdfonts.override { fonts = [ "DejaVuSansMono" ]; })
 
         # # You can also create simple shell scripts directly inside your
         # # configuration. For example, this adds a command 'my-hello' to your
@@ -33,7 +38,7 @@
     ];
 
     home.sessionVariables = {
-				NIX_PATH = "$HOME/.nix-defexpr/channels:$HOME/.nix-defexpr/channels_root";
+        NIX_PATH = "$HOME/.nix-defexpr/channels:$HOME/.nix-defexpr/channels_root";
 
         AWS_SDK_LOAD_CONFIG = "1";
         # AWS_PAGER = ''sh -c 'in=$\$(cat);echo $$in | jq 2> /dev/null || echo $$in' '';
@@ -112,42 +117,42 @@
         recursive = true;
     };
 
-		programs.kitty = {
-				enable = false;
+    programs.kitty = {
+        enable = false;
 
-				font = {
-						size = 11;
-						name = "DejaVuSansMono";
-						package = (pkgs.nerdfonts.override { fonts = [ "DejaVuSansMono" ]; });
-				};
-				settings = {
-						"scrollback_lines" = 50000;
+        font = {
+            size = 11;
+            name = "DejaVuSansMono";
+            package = (pkgs.nerdfonts.override { fonts = [ "DejaVuSansMono" ]; });
+        };
+        settings = {
+            "scrollback_lines" = 50000;
 
-						"background_tint" = 5;
-						"background_opacity" = "0.97";
-						"dynamic_background_opacity" = true;
+            "background_tint" = 5;
+            "background_opacity" = "0.97";
+            "dynamic_background_opacity" = true;
 
-						"touch_scroll_multiplier" = 6;
-						"linux_display_manager" = "wayland";
-						"wayland_titlebar_color" = "background";
-				};
-				shellIntegration = {
-						mode = "no-cursor";
-						enableFishIntegration = true;
-				};
-				keybindings = {
-						"ctrl+alt+enter" = "launch";
-						"ctrl+shift+enter" = "launch --cwd=current";
-						"ctrl+shift+n" = "launch --cwd=current --type os-window";
+            "touch_scroll_multiplier" = 6;
+            "linux_display_manager" = "wayland";
+            "wayland_titlebar_color" = "background";
+        };
+        shellIntegration = {
+            mode = "no-cursor";
+            enableFishIntegration = true;
+        };
+        keybindings = {
+            "ctrl+alt+enter" = "launch";
+            "ctrl+shift+enter" = "launch --cwd=current";
+            "ctrl+shift+n" = "launch --cwd=current --type os-window";
 
-						# Layouts
-						"ctrl+shift+l" = "next_layout";
-						"ctrl+shift+r" = "start_resizing_window";
+            # Layouts
+            "ctrl+shift+l" = "next_layout";
+            "ctrl+shift+r" = "start_resizing_window";
 
-						# SSH
-						"ctrl+shift+alt+p" = "close_shared_ssh_connections";
-				};
-		};
+            # SSH
+            "ctrl+shift+alt+p" = "close_shared_ssh_connections";
+        };
+    };
 
 
     programs.neovim = {
