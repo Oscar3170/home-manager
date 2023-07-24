@@ -19,6 +19,8 @@
   home.packages = [
     pkgs.kops
 
+    pkgs.bat
+    pkgs.exa
     pkgs.fd
     pkgs.ripgrep
 
