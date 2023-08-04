@@ -31,6 +31,7 @@
     pkgs.poetry
     pkgs.pyright
 
+    pkgs.terraform-lsp
 
     pkgs.nil # nix lsp server
 
