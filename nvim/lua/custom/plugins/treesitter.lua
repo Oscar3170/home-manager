@@ -3,14 +3,17 @@ return {
         -- Highlight, edit, and navigate code
         'nvim-treesitter/nvim-treesitter',
         build = ':TSUpdateSync',
+        event = "VeryLazy",
+        -- cmd = { "TSUpdateSync" },
         dependencies = {
             'nvim-treesitter/nvim-treesitter-textobjects',
         },
-        -- cmd = { "TSUpdateSync" },
         keys = {
             { "<c-space>", desc = "Increment selection" },
             { "<bs>",      desc = "Decrement selection", mode = "x" },
         },
+        main = "nvim-treesitter.configs",
+
         ---@type TSConfig
         opts = {
             highlight = { enable = true },
@@ -94,18 +97,9 @@ return {
                 },
             },
         },
-        config = function(_, opts)
-            require("nvim-treesitter.configs").setup(opts)
-
+        init = function(LazyPlugin)
             vim.opt.foldmethod = "expr"
             vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
-
-            -- local augroup = vim.api.nvim_create_augroup("open_folds", {})
-            -- vim.api.nvim_create_autocmd({ "BufReadPost", "FileReadPost" }, {
-            --     -- group = augroup,
-            --     pattern = "*",
-            --     command = "foldopen!",
-            -- })
         end
     },
     { "nvim-treesitter/nvim-treesitter-context" },
