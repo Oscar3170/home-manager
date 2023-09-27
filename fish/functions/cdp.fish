@@ -1,6 +1,7 @@
 function cdp 
-    set -l DIRS ~/Documents/datalake ~/Documents/k8s/ ~/Documents/terraform/ ~/Documents/clientarea/ ~/Documents/git/ ~/.config/nvim
-    set -l selected (fd .git $DIRS --no-ignore-vcs --glob --hidden --exclude '\.terraform' --follow | sed -e 's/\.git\///g' | fzf)
+    set -l DIRS ~
+    set -l excludes -E '\.terraform' -E '/\.*/' -E '/go/' -E 'teams-for-linux'
+    set -l selected (fd .git $DIRS --no-ignore-vcs --glob --hidden --prune --follow $excludes | sed -e 's/\.git\///g' | fzf)
 
     if [ -z $selected ]
         return
