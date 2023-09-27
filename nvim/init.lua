@@ -275,6 +275,7 @@ require('telescope').setup {
       i = {
         ['<C-u>'] = false,
         ['<C-d>'] = false,
+        ['<C-x>'] = require('telescope.actions').delete_buffer,
       },
     },
   },
@@ -295,6 +296,7 @@ vim.keymap.set('n', '<leader>/', function()
 end, { desc = '[/] Fuzzily search in current buffer' })
 
 vim.keymap.set('n', '<leader>gf', require('telescope.builtin').git_files, { desc = 'Search [G]it [F]iles' })
+vim.keymap.set('n', '<leader>gs', require('telescope.builtin').git_status, { desc = '[G]it [S]tatus' })
 vim.keymap.set('n', '<leader>ff', require('telescope.builtin').find_files, { desc = '[F]ind [F]iles' })
 vim.keymap.set('n', '<leader>fh', require('telescope.builtin').help_tags, { desc = '[F]ind [H]elp' })
 vim.keymap.set('n', '<leader>fw', require('telescope.builtin').grep_string, { desc = '[F]ind current [W]ord' })
@@ -366,9 +368,28 @@ local servers = {
   -- tsserver = {},
 
   gopls = {},
-  pyright = {},
+  -- pyright = {},
+  pylsp = {
+    pylsp = {
+      plugins = {
+        rope_completion = { enabled = true },
+        rope_autoimport = { enabled = true },
+        ruff = {
+          enabled = true,
+          extendSelect = { "I" },
+        },
+        autopep8 = { enabled = false },
+        flake8 = { enabled = false },
+        mccabe = { enabled = false },
+        pycodestyle = { enabled = false },
+        pyflakes = { enabled = false },
+      }
+    }
+  },
+
   nil_ls = {},
 
+  lemminx = {},
   terraform_lsp = {},
 
   lua_ls = {
