@@ -53,12 +53,13 @@
     AWS_SDK_LOAD_CONFIG = "1";
     # AWS_PAGER = ''sh -c 'in=$\$(cat);echo $$in | jq 2> /dev/null || echo $$in' '';
     # AWS_PAGER = "jq -rR 'fromjson? // .'";
-    MANPAGER = ''sh -c 'col -bx | bat --pager \"less -RF\" -l man -p' '';
+    MANPAGER = "bat --pager 'less -RF' -l man -p";
     TERMINAL = "kitty";
     EDITOR = "nvim";
     BROWSER = "librewolf";
     PYENV_ROOT = "$HOME/.pyenv";
     TF_LOG = "ERROR";
+    DOCKER_HOST = "unix:///run/user/1000/podman/podman.sock";
   };
 
   programs.home-manager.enable = true;
@@ -69,6 +70,8 @@
     interactiveShellInit = ''
       type -q pyenv; and pyenv init - | source
       type -q rbenv; and source (rbenv init -|psub)
+
+      set -x AWS_PAGER 'sh -c \'in=$(cat);echo $in | jq 2> /dev/null || echo $in\' '
     '';
 
     shellAbbrs = {
