@@ -185,8 +185,10 @@ require('lazy').setup({
   },
 
   require 'custom.plugins.treesitter',
+  -- require 'custom.plugins.null_ls',
 
   { "fladson/vim-kitty" },
+  { "b0o/schemastore.nvim" },
 
   -- NOTE: Next Step on Your Neovim Journey: Add/Configure additional "plugins" for kickstart
   --       These are some example plugins that I've included in the kickstart repository.
@@ -398,6 +400,15 @@ local servers = {
       telemetry = { enable = false },
     },
   },
+
+  jsonls = {
+    json = {
+      schemas = require('schemastore').json.schemas(),
+      validate = { enable = true },
+    },
+  },
+
+
 }
 
 -- Setup neovim lua configuration
