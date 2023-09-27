@@ -248,6 +248,9 @@ vim.o.completeopt = 'menuone,noselect'
 -- NOTE: You should make sure your terminal supports this
 vim.o.termguicolors = true
 
+-- Highlight all search results
+vim.o.hlsearch = true
+
 -- [[ Basic Keymaps ]]
 
 -- Keymaps for better default experience
