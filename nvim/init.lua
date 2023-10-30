@@ -404,6 +404,15 @@ local servers = {
     },
   },
 
+  yamlls = {
+    yaml = {
+      schemastore = { enable = true },
+      -- schemas = {
+      -- ["https://raw.githubusercontent.com/instrumenta/kubernetes-json-schema/master/v1.12.5-standalone-strict/all.json"] = "/*.yaml",
+      -- ["https://json.schemastore.org/kustomization.json"] = "/kustomization.yaml",
+      -- },
+    },
+  },
   jsonls = {
     json = {
       schemas = require('schemastore').json.schemas(),
