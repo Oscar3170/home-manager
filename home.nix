@@ -20,7 +20,7 @@
     pkgs.kops
 
     pkgs.bat
-    pkgs.exa
+    pkgs.eza
     pkgs.fd
     pkgs.ripgrep
 
@@ -53,7 +53,7 @@
     AWS_SDK_LOAD_CONFIG = "1";
     # AWS_PAGER = ''sh -c 'in=$\$(cat);echo $$in | jq 2> /dev/null || echo $$in' '';
     # AWS_PAGER = "jq -rR 'fromjson? // .'";
-    MANPAGER = "bat --pager 'less -RF' -l man -p";
+    MANPAGER = "bat -l man -p";
     TERMINAL = "kitty";
     EDITOR = "nvim";
     BROWSER = "librewolf";
@@ -89,7 +89,7 @@
     shellAliases = {
       vim = "nvim";
       ssh = "kitty +kitten ssh";
-      ls = "exa";
+      ls = "eza";
       fd = "fdfind";
       ip = "/usr/bin/ip -c";
       batlog = "bat --color=always --theme=\"Solarized (light)\" -l log --wrap never -pp";
