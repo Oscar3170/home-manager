@@ -1,0 +1,18 @@
+#!/bin/bash
+
+go_template='{{.firstTimestamp}}SEPARATOR{{.involvedObject.name}}SEPARATOR{{.involvedObject.kind}}SEPARATOR{{.message}}SEPARATOR{{.reason}}SEPARATOR{{.type}}{{"\n"}}'
+
+
+if ( echo $@ | grep -qP -- '-w|--watch' ); then
+	separator='  '
+
+	go_template=$(echo "$go_template" | sed "s/SEPARATOR/$separator/g")
+	kubectl get events $@ -o "go-template=${go_template}" | tail -fn5
+else
+	separator='%%'
+	go_template='{{range .items}}'"$go_template"'{{end}}'
+	go_template=$(echo "$go_template" | sed "s/SEPARATOR/$separator/g")
+	#echo $go_template
+	kubectl get events --sort-by='.metadata.creationTimestamp' ${@} -o "go-template=${go_template}" | column -s "$separator" -t
+fi
+

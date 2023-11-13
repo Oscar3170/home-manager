@@ -1,0 +1,37 @@
+#!/bin/bash
+
+LIGHT="ms=01"
+DARK="ms=00"
+
+RED="31:ne=1"
+GREEN="32:ne=1"
+YELLOW="33:ne=1"
+BLUE="34:ne=1"
+MAGENTA="35:ne=1"
+CYAN="36:ne=1"
+WHITE="37:ne=1"
+
+
+cgrep(){
+	grep --line-buffered --color=always -P "$1"
+}
+
+
+ERROR_PATTERN='(?:\d+\/\d+\s+(?!(?:Running)|(?:Completed))\S+\s+\d+)'
+INIT_PATTERN='(?:([0-9]+)\/([0-9]+)\s+(?:(?:Running)|(?:ContainerCreating)|(?:PodInitializing)|(?:Init:\d+\/\d+))\s+0)'
+PROBLEM_PATTERN='(?:\d+\/\d+\s+(?:(?:Running))\s+(?:(?:[1-9]{1} )|(?:[0-9]{2,} )))|(?:\d+\/\d+\s+(?:(?:Terminating))\s+\d+)'
+OK_PATTERN='(?:([0-9]+)\/\1\s+Running\s+[0-9]+)|(?:0\/[0-9]+\s+Completed\s+[0-9]+)'
+
+RED_PATTERN='(?:\d+\/\d+\s+(?!(?:Running)|(?:Completed))\S+\s+\d+)'
+BLUE_PATTERN='(?:([0-9]+)\/([0-9]+)\s+(?:(?:Running)|(?:ContainerCreating)|(?:PodInitializing)|(?:Init:\d+\/\d+))\s+0)'
+YELLOW_PATTERN='(?:\d+\/\d+\s+(?:(?:Running))\s+(?:(?:[1-9]{1} )|(?:[0-9]{2,} )))|(?:\d+\/\d+\s+(?:(?:Terminating))\s+\d+)'
+GREEN_PATTERN='(?:([0-9]+)\/\1\s+Running\s+[0-9]+)|(?:0\/[0-9]+\s+Completed\s+[0-9]+)'
+
+
+
+kubectl get pods $@ | \
+GREP_COLORS='ms=01;31:ne=1' cgrep "$RED_PATTERN|\$" | \
+GREP_COLORS='ms=01;34:ne=1' cgrep "$BLUE_PATTERN|\$" | \
+GREP_COLORS='ms=01;33:ne=1' cgrep "$YELLOW_PATTERN|\$" | \
+GREP_COLORS='ms=01;32:ne=1' cgrep "$GREEN_PATTERN|\$" | \
+sed 's/\[m/\[0m/g'

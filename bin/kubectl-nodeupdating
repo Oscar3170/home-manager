@@ -1,0 +1,20 @@
+#!/bin/bash
+
+cgrep(){
+	grep --line-buffered --color=always -P "$1"
+}
+
+new_version="v1.24.17"
+
+RED_PATTERN='(?:(?<=\W)NotReady(?=\W))|(?:\s(?!'$new_version')v\d+.\d+.\d+\s)'
+BLUE_PATTERN='(?:(?<=\W)SchedulingDisabled(?=\W))'
+GREEN_PATTERN='(?:\WReady\W)|(?:\s'$new_version'\s)'
+
+
+
+kubectl get nodes --no-headers $@ | \
+sort -k 3 | \
+GREP_COLORS='ms=01;31:ne=1' cgrep "$RED_PATTERN|\$" | \
+GREP_COLORS='ms=01;34:ne=1' cgrep "$BLUE_PATTERN|\$" | \
+GREP_COLORS='ms=01;32:ne=1' cgrep "$GREEN_PATTERN|\$" | \
+sed 's/\[m/\[0m/g'
