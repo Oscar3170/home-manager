@@ -10,7 +10,7 @@
     ];
     imports = [
         ./../modules/kubernetes.nix
-        ./../modules/firefox.nix
+        # ./../modules/firefox.nix
         # ./nb019021-private.nix
     ];
 }
