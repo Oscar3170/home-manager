@@ -188,6 +188,4 @@ in
     };
 
     home.file.".ideavimrc".source = ./.ideavimrc;
-
-    home.file.".local/bin/".source = ./.local/bin;
 }

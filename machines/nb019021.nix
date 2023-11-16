@@ -4,8 +4,13 @@
     home.homeDirectory = "/home/oscar";
 
     targets.genericLinux.enable = true;
-    # imports = [
-    #     ./common.nix
-    #     # ./nb019021-private.nix
-    # ];
+
+    home.packages = with pkgs; [
+        kops
+    ];
+    imports = [
+        ./../modules/kubernetes.nix
+        ./../modules/firefox.nix
+        # ./nb019021-private.nix
+    ];
 }
