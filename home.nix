@@ -19,20 +19,18 @@ in
     # release notes.
     home.stateVersion = "23.05";
 
-    home.keyboard = {
-        layout = "us";
-        model = "pc105";
-        variant = "altgr-intl";
-        options = ["caps:escape" "terminate:ctrl_alt_bksp" "shift:both_capslock" "apple:alupckeys"];
-    };
-
     home.packages = with pkgs; [
+        direnv
+
+        noisetorch
+
         kops
 
         bat
         eza
         fd
         ripgrep
+        fzf
 
         # go development
         delve
@@ -41,9 +39,12 @@ in
         poetry
         pyright
 
+        awscli2
         terraform-lsp
 
         nil # nix lsp server
+
+        glab
 
         lua-language-server
 
@@ -99,7 +100,7 @@ in
             vim = "nvim";
             ssh = "kitty +kitten ssh";
             ls = "eza";
-            ip = "/usr/bin/ip -c";
+            ip = "/usr/sbin/ip -c";
             batlog = "bat --color=always --theme=\"Solarized (light)\" -l log --wrap never -pp";
             kctx = "kubectl config use-context";
             kubens = "kubectl config set-context --current --namespace";
