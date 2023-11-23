@@ -3,11 +3,6 @@
 
 with lib.hm.gvariant;
 {
-    home.packages = with pkgs; [
-        kubectl
-            kubectx
-            krew
-    ];
     dconf.settings = {
         "org/gnome/desktop/input-sources" = {
             current = mkUint32 0;
@@ -32,6 +27,7 @@ with lib.hm.gvariant;
             natural-scroll = false;
             tap-to-click = true;
             two-finger-scrolling-enabled = true;
+            disable-while-typing = true;
         };
 
         "org/gnome/desktop/wm/preferences" = {
@@ -115,7 +111,7 @@ with lib.hm.gvariant;
             show-favorites = true;
             show-mounts = false;
             show-mounts-only-mounted = false;
-            show-show-apps-button = true;
+            show-show-apps-button = false;
             show-trash = false;
         };
 
@@ -143,7 +139,7 @@ with lib.hm.gvariant;
             {"0":"LEFT","1":"LEFT"}
             '';
             panel-sizes = ''
-            {"0":48,"1":48}
+            {"0":54,"1":54}
             '';
             primary-monitor = 1;
             progress-show-count = false;
