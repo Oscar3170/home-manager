@@ -11,5 +11,6 @@
     imports = [
         ./../modules/kubernetes.nix
         ./../modules/librewolf.nix
+        ./../modules/gnome.nix
     ];
 }
