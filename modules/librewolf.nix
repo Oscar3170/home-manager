@@ -2,7 +2,7 @@
 { home, config, pkgs, ... }:
 {
     programs.librewolf = {
-        enable = true;
+        enable = false;
     };
 
     home.file.".librewolf/librewolf.overrides.cfg".source = ./librewolf/librewolf.overrides.cfg;
