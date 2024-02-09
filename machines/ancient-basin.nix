@@ -9,7 +9,7 @@
     kops
   ];
   imports = [
-    ./../modules/kubernetes.nix
+    ./../modules/kubernetes
     ./../modules/librewolf.nix
     ./../modules/gnome.nix
     ./../modules/podman

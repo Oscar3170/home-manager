@@ -24,22 +24,21 @@ in
   xdg.mimeApps.enable = true;
 
   home.packages = with pkgs; [
+    (nerdfonts.override { fonts = [ "DejaVuSansMono" ]; })
+
     pre-commit
     direnv
 
     # noisetorch
-
-    kops
-
     bat
-    eza
     fd
     ripgrep
     fzf
 
     # go development
-    delve
+    go
     gopls
+    delve
 
     poetry
     pyright
@@ -47,37 +46,24 @@ in
     awscli2
     terraform-lsp
 
-    nil # nix lsp server
     rnix-lsp
 
     glab
 
     lua-language-server
 
-    (nerdfonts.override { fonts = [ "DejaVuSansMono" ]; })
-
     jetbrains.pycharm-professional
-
-    # # You can also create simple shell scripts directly inside your
-    # # configuration. For example, this adds a command 'my-hello' to your
-    # # environment:
-    # (pkgs.writeShellScriptBin "my-hello" ''
-    #   echo "Hello, ${config.home.username}!"
-    # '')
   ];
 
   home.sessionVariables = {
     NIX_PATH = "$HOME/.nix-defexpr/channels:$HOME/.nix-defexpr/channels_root";
     AWS_SDK_LOAD_CONFIG = "1";
-    # AWS_PAGER = ''sh -c 'in=$\$(cat);echo $$in | jq 2> /dev/null || echo $$in' '';
-    # AWS_PAGER = "jq -rR 'fromjson? // .'";
     MANPAGER = "bat -l man -p";
     TERMINAL = "kitty";
     EDITOR = "nvim";
     BROWSER = "librewolf";
     PYENV_ROOT = "$HOME/.pyenv";
     TF_LOG = "ERROR";
-    DOCKER_HOST = "unix:///run/user/1000/podman/podman.sock";
   };
 
   pam.sessionVariables = config.home.sessionVariables // {
@@ -106,12 +92,8 @@ in
       tf = "terraform";
       kbat = "bat -plyaml";
       rmr = "rm -r";
-      kgs = "kubectl get svc";
-      kdp = "kubectl describe pod";
-      kgp = "kubectl watch";
       cat = "bat -pp";
       apt = "aptitude";
-      k = "kubectl";
     };
 
     shellAliases = {
@@ -130,16 +112,6 @@ in
       { name = "tide"; src = pkgs.fishPlugins.tide.src; }
       { name = "foreign-env"; src = pkgs.fishPlugins.foreign-env.src; }
       { name = "done"; src = pkgs.fishPlugins.done.src; }
-
-      {
-        name = "kubectl-completions";
-        src = pkgs.fetchFromGitHub {
-          owner = "evanlucas";
-          repo = "fish-kubectl-completions";
-          rev = "ced676392575d618d8b80b3895cdc3159be3f628";
-          sha256 = "sha256-OYiYTW+g71vD9NWOcX1i2/TaQfAg+c2dJZ5ohwWSDCc=";
-        };
-      }
     ];
   };
 
@@ -207,4 +179,10 @@ in
   };
 
   home.file.".ideavimrc".source = ./.ideavimrc;
+
+  programs.eza = {
+    enable = true;
+    enableAliases = true;
+    git = true;
+  };
 }
