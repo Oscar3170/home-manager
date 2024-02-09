@@ -381,6 +381,13 @@ local servers = {
           enabled = true,
           extendSelect = { "I" },
         },
+        pylsp_mypy = {
+          enabled = true,
+          live_mode = false,
+          dmypy = true,
+          report_progress = true,
+          overrides = { "--python-executable", ".venv/bin/python", true },
+        },
         autopep8 = { enabled = false },
         flake8 = { enabled = false },
         mccabe = { enabled = false },
@@ -390,7 +397,7 @@ local servers = {
     }
   },
 
-  nil_ls = {},
+  rnix = {},
 
   lemminx = {},
   terraform_lsp = {},

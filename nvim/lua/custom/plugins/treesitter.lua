@@ -102,5 +102,11 @@ return {
             vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
         end
     },
-    { "nvim-treesitter/nvim-treesitter-context" },
+    {
+        "nvim-treesitter/nvim-treesitter-context",
+        opts = {
+            max_lines = 20,          -- How many lines the window should span. Values <= 0 mean no limit.
+            multiline_threshold = 5, -- Maximum number of lines to show for a single context
+        },
+    },
 }
