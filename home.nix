@@ -44,7 +44,7 @@ in
     pyright
 
     awscli2
-    terraform-lsp
+    terraform-ls
 
     rnix-lsp
 

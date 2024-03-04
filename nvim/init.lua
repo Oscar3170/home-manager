@@ -400,7 +400,7 @@ local servers = {
   rnix = {},
 
   lemminx = {},
-  terraform_lsp = {},
+  terraformls = {},
 
   lua_ls = {
     Lua = {
