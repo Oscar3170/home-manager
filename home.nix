@@ -1,4 +1,3 @@
-# vim: sw=4
 { config, home, pkgs, ... }:
 
 let
@@ -51,14 +50,11 @@ in
     glab
 
     lua-language-server
-
-    jetbrains.pycharm-professional
   ];
 
   home.sessionVariables = {
     NIX_PATH = "$HOME/.nix-defexpr/channels:$HOME/.nix-defexpr/channels_root";
     AWS_SDK_LOAD_CONFIG = "1";
-    MANPAGER = "bat -l man -p";
     TERMINAL = "kitty";
     EDITOR = "nvim";
     BROWSER = "librewolf";
@@ -86,6 +82,7 @@ in
       type -q rbenv; and source (rbenv init -|psub)
 
       set -x AWS_PAGER 'sh -c \'in=$(cat);echo $in | jq 2> /dev/null || echo $in\' '
+      set -x MANPAGER 'sh -c \'sed -r "s/\x1B\[([0-9]{1,3}(;[0-9]{1,2};?)?)?[mGK]//g" | bat --language man --plain\' '
     '';
 
     shellAbbrs = {
@@ -100,7 +97,7 @@ in
       vim = "nvim";
       ssh = "kitty +kitten ssh";
       ls = "eza";
-      ip = "/usr/sbin/ip -c";
+      ip = "/usr/bin/env ip -c";
       batlog = "bat --color=always --theme=\"Solarized (light)\" -l log --wrap never -pp";
       kctx = "kubectl config use-context";
       kubens = "kubectl config set-context --current --namespace";
@@ -186,3 +183,4 @@ in
     git = true;
   };
 }
+
