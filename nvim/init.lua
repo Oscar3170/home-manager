@@ -292,6 +292,9 @@ require('telescope').setup {
         ['<C-d>'] = false,
         ['<C-x>'] = require('telescope.actions').delete_buffer,
       },
+      n = {
+        ['<C-x>'] = require('telescope.actions').delete_buffer,
+      },
     },
   },
 }
@@ -502,6 +505,3 @@ cmp.setup {
     { name = 'luasnip' },
   },
 }
-
--- The line beneath this is called `modeline`. See `:help modeline`
--- vim: ts=2 sts=2 sw=2 et
