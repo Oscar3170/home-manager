@@ -1,13 +1,12 @@
-# vim: sw=4
 { home, config, pkgs, ... }:
 {
-    programs.librewolf = {
-        enable = false;
-    };
+  programs.librewolf = {
+    enable = false;
+  };
 
-    home.file.".librewolf/librewolf.overrides.cfg".source = ./librewolf/librewolf.overrides.cfg;
+  home.file.".librewolf/librewolf.overrides.cfg".source = ./librewolf/librewolf.overrides.cfg;
 
-    home.sessionVariables = {
-        MOZ_ENABLE_WAYLAND = "1";
-    };
+  home.sessionVariables = {
+    MOZ_ENABLE_WAYLAND = "1";
+  };
 }
