@@ -118,7 +118,6 @@ with lib.hm.gvariant;
       animate-appicon-hover-animation-extent = "{'RIPPLE': 4, 'PLANK': 4, 'SIMPLE': 1}";
       appicon-margin = 8;
       appicon-padding = 4;
-      available-monitors = [ 1 0 ];
       dot-position = "BOTTOM";
       hide-overview-on-startup = true;
       hotkeys-overlay-combo = "TEMPORARILY";
@@ -140,7 +139,6 @@ with lib.hm.gvariant;
       panel-sizes = ''
         {"0":54,"1":54}
       '';
-      primary-monitor = 1;
       progress-show-count = false;
       scroll-panel-action = "NOTHING";
       show-appmenu = false;
