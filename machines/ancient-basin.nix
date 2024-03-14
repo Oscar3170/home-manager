@@ -10,7 +10,7 @@
   ];
   imports = [
     ./../modules/kubernetes
-    ./../modules/librewolf.nix
+    ./../modules/librewolf
     ./../modules/gnome.nix
     ./../modules/podman
     ./ancient-basin.private.nix

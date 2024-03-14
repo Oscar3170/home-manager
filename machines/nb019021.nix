@@ -12,7 +12,7 @@
   imports = [
     ./../modules/kubernetes
     ./../modules/podman
-    ./../modules/librewolf.nix
+    ./../modules/librewolf
     ./../modules/gnome.nix
     ./nb019021.private.nix
   ];
