@@ -3,7 +3,8 @@ return {
         -- Highlight, edit, and navigate code
         'nvim-treesitter/nvim-treesitter',
         build = ':TSUpdateSync',
-        event = "VeryLazy",
+        event = { "BufReadPost", "BufNewFile" },
+
         -- cmd = { "TSUpdateSync" },
         dependencies = {
             'nvim-treesitter/nvim-treesitter-textobjects',
@@ -98,8 +99,20 @@ return {
             },
         },
         init = function(LazyPlugin)
+            vim.opt.foldlevelstart = 99
             vim.opt.foldmethod = "expr"
             vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
+            --
+            -- local augroup = vim.api.nvim_create_augroup("open_folds", {})
+            -- vim.api.nvim_create_autocmd({ "BufReadPost", "FileReadPost" }, {
+            --     group = augroup,
+            --     pattern = "*",
+            --     -- command = "foldopen!",
+            --     callback = function(args)
+            --         vim.opt.foldlevelstart =
+            --
+            --     end
+            -- })
         end
     },
     {
