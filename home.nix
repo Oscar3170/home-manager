@@ -45,7 +45,7 @@ in
     awscli2
     terraform-ls
 
-    rnix-lsp
+    nixd
 
     glab
 
@@ -179,7 +179,6 @@ in
 
   programs.eza = {
     enable = true;
-    enableAliases = true;
     git = true;
   };
 }

@@ -369,7 +369,7 @@ local servers = {
     }
   },
 
-  rnix = {},
+  nixd = {},
 
   lemminx = {},
   terraformls = {},
