@@ -195,6 +195,7 @@ require('lazy').setup({
   },
 
   require 'custom.plugins.treesitter',
+  require 'custom.plugins.plantuml',
   -- require 'custom.plugins.null_ls',
 
   { "fladson/vim-kitty" },
