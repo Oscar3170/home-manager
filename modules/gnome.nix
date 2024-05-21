@@ -1,20 +1,21 @@
 { lib, ... }:
-
-with lib.hm.gvariant;
+let
+  gvariant = lib.hm.gvariant;
+in 
 {
   dconf.settings = {
     "org/gnome/desktop/input-sources" = {
-      current = mkUint32 0;
+      current = gvariant.mkUint32 0;
       per-window = false;
       show-all-sources = false;
-      sources = [ (mkTuple [ "xkb" "us+altgr-intl" ]) ];
+      sources = [ (gvariant.mkTuple [ "xkb" "us+altgr-intl" ]) ];
       xkb-options = [ "caps:escape" "terminate:ctrl_alt_bksp" "shift:both_capslock" "apple:alupckeys" ];
     };
 
     "org/gnome/desktop/peripherals/keyboard" = {
-      delay = mkUint32 300;
+      delay = gvariant.mkUint32 300;
       numlock-state = true;
-      repeat-interval = mkUint32 25;
+      repeat-interval = gvariant.mkUint32 25;
     };
 
     "org/gnome/desktop/peripherals/mouse" = {
@@ -147,7 +148,7 @@ with lib.hm.gvariant;
       show-running-apps = false;
       show-tooltip = false;
       show-window-previews = false;
-      status-icon-padding = -1;
+      # status-icon-padding = -1;
       stockgs-keep-dash = true;
       stockgs-panelbtn-click-only = true;
       trans-use-custom-bg = false;
