@@ -1,10 +1,18 @@
-{ home, config, pkgs, ... }:
+{ config, lib, pkgs, ... }:
 {
   programs.librewolf = {
     enable = false;
   };
 
   home.file.".librewolf/librewolf.overrides.cfg".source = ./librewolf.overrides.cfg;
+  home.file.".librewolf/chrome".source = ./chrome;
+
+  home.activation.librewolfLinkUserChrome =
+    lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+      for profile in $(find "$HOME/.librewolf/" -maxdepth 1 -name "*.default-default"); do
+        ln -sfT "$HOME/.librewolf/chrome" "$profile/chrome"
+      done
+    '';
 
   home.sessionVariables = {
     MOZ_ENABLE_WAYLAND = "1";

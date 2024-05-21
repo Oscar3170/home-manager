@@ -1,0 +1,23 @@
+@import url("autohide_sidebar.css");
+
+
+#sidebar-box{
+  --uc-sidebar-width: 35px;
+  --uc-sidebar-hover-width: 350px;
+}
+
+#sidebar-header{ 
+  visibility: collapse;
+}
+
+.tabbrowser-tab {
+  visibility: collapse;
+}
+#nav-bar {
+  margin-top: -40px;
+  margin-right: 100px;
+  border-radius: 10px 0 0 0;
+}
+.titlebar-button {
+  height: 40px;
+}
