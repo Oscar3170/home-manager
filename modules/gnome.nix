@@ -164,6 +164,10 @@ in
       use-default-locale = false;
     };
 
+    "org/gnome/shell/extensions/panel-date-format" = {
+      format = " %d/%m \n%H : %M";
+    };
+
     "org/gnome/shell/extensions/tiling-assistant" = {
       activate-layout0 = [ ];
       activate-layout1 = [ ];
