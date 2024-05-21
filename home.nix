@@ -69,6 +69,14 @@ in
 
   programs.home-manager.enable = true;
 
+  programs.git = {
+    enable = true;
+    aliases = {
+      s = "status";
+      d = "diff";
+    };
+  };
+
   programs.man = {
     enable = true;
     generateCaches = true;
