@@ -34,6 +34,8 @@ in
     ripgrep
     fzf
 
+    jrnl
+
     # go development
     go
     gopls
