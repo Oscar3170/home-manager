@@ -44,7 +44,12 @@ in
     poetry
     pyright
 
+    dotnet-sdk_8
+    omnisharp-roslyn
+
     awscli2
+
+    yaml-language-server
 
     nixd
 
@@ -62,6 +67,10 @@ in
     PYENV_ROOT = "$HOME/.pyenv";
     TF_LOG = "ERROR";
   };
+
+  home.sessionPath = [
+    "$HOME/.local/bin"
+  ];
 
   pam.sessionVariables = config.home.sessionVariables // {
     LANGUAGE = "en_US:en";

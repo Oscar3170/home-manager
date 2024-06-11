@@ -343,6 +343,17 @@ local servers = {
   -- rust_analyzer = {},
   -- tsserver = {},
 
+  omnisharp = {
+    cmd = { "OmniSharp" },
+    settings = {
+      Sdk = {
+        -- Specifies whether to include preview versions of the .NET SDK when
+        -- determining which version to use for project loading.
+        IncludePrereleases = true,
+      },
+    },
+  },
+
   gopls = {},
   pyright = {},
   -- pylsp = {
@@ -376,25 +387,31 @@ local servers = {
   terraformls = {},
 
   lua_ls = {
-    Lua = {
-      workspace = { checkThirdParty = false },
-      telemetry = { enable = false },
+    settings = {
+      Lua = {
+        workspace = { checkThirdParty = false },
+        telemetry = { enable = false },
+      },
     },
   },
 
   yamlls = {
-    yaml = {
-      schemastore = { enable = true },
-      -- schemas = {
-      -- ["https://raw.githubusercontent.com/instrumenta/kubernetes-json-schema/master/v1.12.5-standalone-strict/all.json"] = "/*.yaml",
-      -- ["https://json.schemastore.org/kustomization.json"] = "/kustomization.yaml",
-      -- },
+    settings = {
+      yaml = {
+        schemastore = { enable = true },
+        -- schemas = {
+        -- ["https://raw.githubusercontent.com/instrumenta/kubernetes-json-schema/master/v1.12.5-standalone-strict/all.json"] = "/*.yaml",
+        -- ["https://json.schemastore.org/kustomization.json"] = "/kustomization.yaml",
+        -- },
+      },
     },
   },
   jsonls = {
-    json = {
-      schemas = require('schemastore').json.schemas(),
-      validate = { enable = true },
+    settings = {
+      json = {
+        schemas = require('schemastore').json.schemas(),
+        validate = { enable = true },
+      },
     },
   },
 
@@ -408,11 +425,15 @@ require('neodev').setup()
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 
-for server_name, settings in pairs(servers) do
+for server_name, opts in pairs(servers) do
+  if opts["settings"] ~= nil then
+    opts.settings = {}
+  end
   require('lspconfig')[server_name].setup {
+    cmd = opts["cmd"],
     capabilities = capabilities,
     on_attach = on_attach,
-    settings = settings,
+    settings = opts.settings,
   }
 end
 
