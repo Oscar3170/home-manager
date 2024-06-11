@@ -79,11 +79,22 @@ in
 
   programs.home-manager.enable = true;
 
+  xdg.configFile."nix/nix.conf" = {
+    text = ''
+      experimental-features = nix-command flakes
+    '';
+  };
+
   programs.git = {
     enable = true;
     aliases = {
       s = "status";
       d = "diff";
+    };
+    extraConfig = {
+      pull = {
+        rebase = true;
+      };
     };
   };
 
