@@ -1,0 +1,3 @@
+# vim: ft=hcl
+plugin_cache_dir = "$HOME/.local/share/terraform/plugin-cache"
+

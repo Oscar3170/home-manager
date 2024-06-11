@@ -14,6 +14,7 @@
     ./../modules/podman
     ./../modules/librewolf
     ./../modules/gnome.nix
+    ./../modules/terraform
     ./ps-stfa080-00238.private.nix
   ];
 }

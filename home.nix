@@ -45,7 +45,6 @@ in
     pyright
 
     awscli2
-    terraform-ls
 
     nixd
 
@@ -96,7 +95,6 @@ in
     '';
 
     shellAbbrs = {
-      tf = "terraform";
       kbat = "bat -plyaml";
       rmr = "rm -r";
       cat = "bat -pp";
