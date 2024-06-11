@@ -19,16 +19,15 @@
     "$HOME/.local/bin/kubernetes"
   ];
 
-  home.shellAliases = {
+  programs.fish.shellAbbrs = {
     k = "kubectl";
     kd = "kubectl describe";
     kl = "kubectl log";
 
     kgs = "kubectl get svc";
 
-    kgp = "kubectl watch";
+    kgp = "kubectl cget";
     kdp = "kubectl describe pod";
     kaf = "kubectl apply -f";
   };
-
 }
