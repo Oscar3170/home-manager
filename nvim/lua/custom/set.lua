@@ -50,3 +50,11 @@ vim.opt.completeopt = 'menuone,noselect'
 vim.opt.termguicolors = true
 
 vim.opt.colorcolumn = "90"
+
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = { "md", "markdown", "txt", "text" },
+	callback = function(_)
+		vim.opt_local.spell = true
+		vim.opt_local.spelllang = { "pt_br", "en" }
+	end
+})
