@@ -7,6 +7,9 @@
 
     kops
 
+    kubernetes-helm
+    helm-ls
+
     aws-iam-authenticator
   ];
 
