@@ -50,6 +50,10 @@ in
 
 
     # Keybindings
+    "org/gnome/shell/keybindings" = {
+      show-screenshot-ui=[ "Print" "<Shift><Alt>4" ]; # Keychron sends Shift+Alt+4 for Print when in MacOs mode
+    };
+
     "org/gnome/settings-daemon/plugins/media-keys" = {
       custom-keybindings = [ "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/" ];
       home = [ "<Super>e" ];
