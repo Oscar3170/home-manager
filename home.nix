@@ -34,7 +34,10 @@ in
     fd
     ripgrep
     fzf
+    jq
+    btop
 
+    httpie
     jrnl
 
     # go development
