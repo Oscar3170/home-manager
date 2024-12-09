@@ -1,8 +1,9 @@
-{ config, home, pkgs, ... }:
+{ config, lib, pkgs, ... }:
 
 let
   hostname = builtins.replaceStrings [ "\n" ] [ "" ] (builtins.readFile /etc/hostname);
   machine_config = if builtins.pathExists ./machines/${hostname}.nix then ./machines/${hostname}.nix else ./machines/default.nix;
+  isLinux = builtins.match ".*-linux" builtins.currentSystem == [ ];
 in
 {
   imports = [
@@ -18,9 +19,9 @@ in
   # release notes.
   home.stateVersion = "23.05";
 
-  xdg.enable = true;
-  xdg.mime.enable = true;
-  xdg.mimeApps.enable = true;
+  xdg.enable = isLinux;
+  xdg.mime.enable = isLinux;
+  xdg.mimeApps.enable = isLinux;
 
   home.packages = with pkgs; [
     (nerdfonts.override { fonts = [ "DejaVuSansMono" ]; })

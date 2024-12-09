@@ -1,4 +1,10 @@
 { config, lib, pkgs, ... }:
+let
+  profilesPath = if builtins.currentSystem == "aarch64-darwin" then
+    "$HOME/Library/Application Support/librewolf/Profiles/"
+  else
+    "$HOME/.librewolf/";
+in
 {
   programs.librewolf = {
     enable = false;
@@ -9,7 +15,8 @@
 
   home.activation.librewolfLinkUserChrome =
     lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-      for profile in $(find "$HOME/.librewolf/" -maxdepth 1 -name "*.default-default"); do
+      export IFS=$'\n'
+      for profile in $(find "${profilesPath}" -maxdepth 1 -name "*.default-default"); do
         ln -sfT "$HOME/.librewolf/chrome" "$profile/chrome"
       done
     '';
@@ -18,7 +25,7 @@
     MOZ_ENABLE_WAYLAND = "1";
   };
 
-  xdg.mimeApps.defaultApplications = {
+  xdg.mimeApps.defaultApplications = lib.mkDefault {
     "x-scheme-handler/http" = [ "librewolf.desktop" ];
     "application/xhtml+xml" = [ "librewolf.desktop" ];
     "text/html" = [ "librewolf.desktop" ];
