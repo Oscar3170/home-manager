@@ -70,6 +70,7 @@ in
     BROWSER = "librewolf";
     PYENV_ROOT = "$HOME/.pyenv";
     TF_LOG = "ERROR";
+    DOTNET_CLI_TELEMETRY_OPTOUT = "true";
   };
 
   home.sessionPath = [
