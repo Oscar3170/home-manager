@@ -92,10 +92,14 @@ in
 
   programs.git = {
     enable = true;
+
+    userName = "Oscar Lenzi";
+
     aliases = {
       s = "status";
       d = "diff";
     };
+
     extraConfig = {
       pull = {
         rebase = true;
