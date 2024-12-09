@@ -16,7 +16,7 @@ in
   home.activation.librewolfLinkUserChrome =
     lib.hm.dag.entryAfter [ "writeBoundary" ] ''
       export IFS=$'\n'
-      for profile in $(find "${profilesPath}" -maxdepth 1 -name "*.default-default"); do
+      for profile in $(find "${profilesPath}" -maxdepth 2 -name "storage.sqlite" | sed -e 's/\/storage.sqlite//g'); do
         ln -sfT "$HOME/.librewolf/chrome" "$profile/chrome"
       done
     '';
