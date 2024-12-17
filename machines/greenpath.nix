@@ -6,10 +6,11 @@
   targets.genericLinux.enable = true;
 
   imports = [
-    ./../modules/kubernetes
-    ./../modules/librewolf
-    ./../modules/gnome.nix
-    ./../modules/podman
+    ../modules/kubernetes
+    ../modules/librewolf
+    ../modules/gnome.nix
+    ../modules/podman
+    ../modules/terraform
   ];
 
   dconf.settings."org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1" = {
