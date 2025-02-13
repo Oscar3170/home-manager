@@ -199,6 +199,18 @@ require('lazy').setup({
     end,
   },
 
+  {
+    "lervag/vimtex",
+    lazy = false, -- we don't want to lazy load VimTeX
+    -- tag = "v2.15", -- uncomment to pin to a specific release
+    init = function()
+      -- VimTeX configuration goes here, e.g.
+      vim.g.vimtex_view_method = "general"
+      vim.g.vimtex_view_general_viewer = "evince"
+      -- vim.g.vimtex_compiler_method = "latexrun"
+    end
+  },
+
   require 'custom.plugins.treesitter',
   require 'custom.plugins.plantuml',
   -- require 'custom.plugins.null_ls',
