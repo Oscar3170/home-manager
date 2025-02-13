@@ -5,6 +5,10 @@
 
   targets.genericLinux.enable = true;
 
+  home.packages = with pkgs; [
+    texliveFull # packages to write latex
+  ];
+
   imports = [
     ../modules/kubernetes
     # ../modules/librewolf
