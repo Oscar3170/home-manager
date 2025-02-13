@@ -66,6 +66,13 @@ in
       name = "Terminal";
     };
 
+    # 1Password quick search
+    "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1" = {
+      name = "1Password";
+      command = "1password --quick-access";
+      binding = "<Shift><Alt>z";
+    };
+
     # Extensions
     "org/gnome/shell/extensions/clipboard-history" = {
       cache-only-favorites = true;

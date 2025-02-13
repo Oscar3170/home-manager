@@ -12,10 +12,4 @@
     ../modules/podman
     ../modules/terraform
   ];
-
-  dconf.settings."org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1" = {
-    name = "1Password";
-    command = "1password --quick-access";
-    binding = "<Shift><Alt>z";
-  };
 }
