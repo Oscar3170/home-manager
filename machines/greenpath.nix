@@ -5,6 +5,11 @@
 
   targets.genericLinux.enable = true;
 
+  home.packages = with pkgs; [
+    google-cloud-sdk
+    bruno
+  ];
+
   imports = [
     ../modules/kubernetes
     ../modules/librewolf
