@@ -60,6 +60,8 @@ in
     glab
 
     lua-language-server
+
+    rust-analyzer
   ];
 
   home.sessionVariables = {
