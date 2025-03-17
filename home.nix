@@ -24,7 +24,7 @@ in
   xdg.mimeApps.enable = isLinux;
 
   home.packages = with pkgs; [
-    (nerdfonts.override { fonts = [ "DejaVuSansMono" ]; })
+    nerd-fonts.dejavu-sans-mono   
 
     pre-commit
     direnv
