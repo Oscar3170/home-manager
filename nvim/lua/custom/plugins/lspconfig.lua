@@ -66,6 +66,21 @@ local servers = {
       },
     },
   },
+
+  volar = {
+    filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue' }, -- add filetypes for typescript, javascript and vue
+    init_options = {
+      typescript = {
+        tsdk = vim.fs.dirname(vim.system({ 'which', 'tsserver' }, { text = true }):wait().stdout) .. '/../lib/node_modules/typescript/lib',
+      },
+      vue = {
+        -- disable hybrid mode
+        hybridMode = false,
+      },
+    },
+  },
+
+  tailwindcss = {},
 }
 
 return {

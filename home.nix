@@ -62,8 +62,12 @@ in
     glab
 
     lua-language-server
+    vue-language-server
+    typescript
+    typescript-language-server
+    tailwindcss-language-server
 
-    rust-analyzer
+    bun
   ];
 
   home.sessionVariables = {
