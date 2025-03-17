@@ -7,7 +7,6 @@
 
   home.packages = with pkgs; [
     google-cloud-sdk
-    bruno
   ];
 
   imports = [
