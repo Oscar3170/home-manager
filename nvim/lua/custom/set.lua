@@ -1,6 +1,5 @@
 -- [[ Setting options ]]
 -- See `:help vim.o`
--- NOTE: You can change these options as you wish!
 
 -- Set highlight on search
 vim.opt.hlsearch = true
@@ -28,9 +27,12 @@ vim.opt.clipboard = 'unnamedplus'
 -- Enable break indent
 vim.opt.breakindent = true
 
+-- Should indent {<CR>} correctly
+vim.opt.cindent = true
+
 -- Save undo history
 vim.opt.undofile = true
-vim.opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
+vim.opt.undodir = os.getenv 'HOME' .. '/.vim/undodir'
 
 -- Case-insensitive searching UNLESS \C or capital in search
 vim.opt.ignorecase = true
@@ -49,12 +51,16 @@ vim.opt.completeopt = 'menuone,noselect'
 -- NOTE: You should make sure your terminal supports this
 vim.opt.termguicolors = true
 
-vim.opt.colorcolumn = "90"
+vim.opt.colorcolumn = '90'
 
-vim.api.nvim_create_autocmd("FileType", {
-	pattern = { "md", "markdown", "txt", "text" },
-	callback = function(_)
-		vim.opt_local.spell = true
-		vim.opt_local.spelllang = { "pt_br", "en" }
-	end
+-- Configure how new splits should be opened
+vim.opt.splitright = true
+vim.opt.splitbelow = true
+
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = { 'md', 'markdown', 'txt', 'text' },
+  callback = function(_)
+    vim.opt_local.spell = true
+    vim.opt_local.spelllang = { 'pt_br', 'en' }
+  end,
 })

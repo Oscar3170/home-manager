@@ -55,6 +55,8 @@ in
 
     yaml-language-server
 
+    stylua
+
     nixd
 
     glab
