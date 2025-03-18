@@ -11,7 +11,9 @@ function glab-var-edit
 
   if set -ql _flag_scope
     set -f scope "$_flag_scope"
-    set -x TMP_FILE "$TMP_FILE-$scope"
+    set -f scope_sanitized (string replace '*' '+' "$scope")
+    set -f scope_sanitized (string replace '/' '__' "$scope")
+    set -x TMP_FILE "$TMP_FILE-$scope_sanitized"
   else
     set -f scope "*"
   end
@@ -31,11 +33,13 @@ function glab-var-edit
     rm -f $TMP_FILE $TMP_FILE.before
   end
 
-  glab variable get --scope $scope $var_name > $TMP_FILE
-  if test $status -gt 0
+  set -l TMP_ERROR_FILE (mktemp)
+  glab variable get --scope "$scope" "$var_name" 2>$TMP_ERROR_FILE >$TMP_FILE
+  if grep -q '404 Not Found' $TMP_ERROR_FILE
     echo "Failed to get current variable value"
-    set -f create_var
+    set -f create_var true
   end
+  rm -f $TMP_ERROR_FILE
 
   cp "$TMP_FILE" "$TMP_FILE.before"
   if test -z "$argv[2]"
@@ -66,12 +70,20 @@ function glab-var-edit
 
 
   echo
-  if set -qf $create_var
+  if set -qf create_var
     echo "Creating variable..."
-    cat $TMP_FILE | glab variable set $glab_args $var_name
+    set -f glab_var_action set
   else
     echo "Updating variable..."
-    cat $TMP_FILE | glab variable update $glab_args $var_name
+    set -f glab_var_action update
+  end
+
+  read -l -P 'Do you want to continue? [y/N] ' confirm
+  switch $confirm
+    case Y y yes Yes
+      cat $TMP_FILE | glab variable "$glab_var_action" $glab_args "$var_name"
+    case '' N n no No
+      return 1
   end
 
   echo "Done"
