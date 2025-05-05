@@ -4,6 +4,7 @@
 #sidebar-box{
   --uc-sidebar-width: 35px;
   --uc-sidebar-hover-width: 350px;
+  --browser-area-z-index-sidebar: 3;
 }
 
 #sidebar-header{ 

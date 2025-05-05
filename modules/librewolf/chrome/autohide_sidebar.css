@@ -17,11 +17,11 @@ See the above repository for updates as well as full license text. */
   max-width: var(--uc-sidebar-width) !important;
   z-index: var(--browser-area-z-index-sidebar,2);
 }
-#sidebar-box[positionend]{ direction: rtl }
-#sidebar-box[positionend] > *{ direction: ltr }
+#sidebar-box[sidebar-positionend]{ direction: rtl }
+#sidebar-box[sidebar-positionend] > *{ direction: ltr }
 
-#sidebar-box[positionend]:-moz-locale-dir(rtl){ direction: ltr }
-#sidebar-box[positionend]:-moz-locale-dir(rtl) > *{ direction: rtl }
+#sidebar-box[sidebar-positionend]:-moz-locale-dir(rtl){ direction: ltr }
+#sidebar-box[sidebar-positionend]:-moz-locale-dir(rtl) > *{ direction: rtl }
 
 #main-window[sizemode="fullscreen"] #sidebar-box{ --uc-sidebar-width: 1px; }
 
@@ -75,17 +75,17 @@ See the above repository for updates as well as full license text. */
   border-inline-width: 0px 1px;
 }
 
-#sidebar-box:not([positionend]) > :-moz-locale-dir(rtl),
-#sidebar-box[positionend] > *{
+#sidebar-box:not([sidebar-positionend]) > :-moz-locale-dir(rtl),
+#sidebar-box[sidebar-positionend] > *{
   border-inline-width: 1px 0px;
 }
 
 /* Move statuspanel to the other side when sidebar is hovered so it doesn't get covered by sidebar */
 
-#sidebar-box:not([positionend]):hover ~ #appcontent #statuspanel{
+#sidebar-box:not([sidebar-positionend]):hover ~ #appcontent #statuspanel{
   inset-inline: auto 0px !important;
 }
-#sidebar-box:not([positionend]):hover ~ #appcontent #statuspanel-label{
+#sidebar-box:not([sidebar-positionend]):hover ~ #appcontent #statuspanel-label{
   margin-inline: 0px !important;
   border-left-style: solid !important; 
 }
