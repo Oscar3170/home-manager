@@ -5,6 +5,8 @@
     kubeswitch
     krew
 
+    kustomize
+
     kops
 
     kubernetes-helm

@@ -35,6 +35,7 @@ in
     ripgrep
     fzf
     jq
+    yq-go
     btop
 
     httpie
@@ -45,6 +46,7 @@ in
     gopls
     delve
 
+    uv
     poetry
     pyright
 
