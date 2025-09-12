@@ -12,7 +12,7 @@ function glab-var-edit
   if set -ql _flag_scope
     set -f scope "$_flag_scope"
     set -f scope_sanitized (string replace '*' '+' "$scope")
-    set -f scope_sanitized (string replace '/' '__' "$scope")
+    set -f scope_sanitized (string replace '/' '__' "$scope_sanitized")
     set -x TMP_FILE "$TMP_FILE-$scope_sanitized"
   else
     set -f scope "*"
