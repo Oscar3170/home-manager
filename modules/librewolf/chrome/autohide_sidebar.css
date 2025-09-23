@@ -41,7 +41,7 @@ See the above repository for updates as well as full license text. */
 }
 
 #sidebar-header,
-#sidebar{
+.sidebar-browser-stack{
   transition: min-width var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type) var(--uc-autohide-sidebar-delay) !important;
   min-width: var(--uc-sidebar-width) !important;
   will-change: min-width;
@@ -50,7 +50,7 @@ See the above repository for updates as well as full license text. */
 #sidebar-box:-moz-drag-over > #sidebar-header,
 #sidebar-box:-moz-drag-over > #sidebar
 #sidebar-box:hover > #sidebar-header,
-#sidebar-box:hover > #sidebar{
+#sidebar-box:hover > .sidebar-browser-stack{
   min-width: var(--uc-sidebar-hover-width) !important;
   transition-delay: 100ms !important;
 }
@@ -68,7 +68,7 @@ See the above repository for updates as well as full license text. */
 
 /* Add sidebar divider and give it background */
 
-#sidebar,
+.sidebar-browser-stack,
 #sidebar-header{
   background-color: inherit !important;
   border-inline: 1px solid rgb(80,80,80);
