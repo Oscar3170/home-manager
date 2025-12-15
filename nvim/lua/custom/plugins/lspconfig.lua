@@ -19,7 +19,7 @@ local servers = {
   nixd = {},
 
   lemminx = {},
-  terraformls = {},
+  tofu_ls = {},
 
   lua_ls = {
     settings = {

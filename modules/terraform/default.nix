@@ -2,7 +2,7 @@
 {
   home.packages = with pkgs; [ 
     opentofu
-    terraform-ls
+    tofu-ls
   ];
 
   programs.fish.shellAbbrs.tf = "tofu";
