@@ -15,7 +15,7 @@ local servers = {
   },
 
   gopls = {},
-  pyright = {},
+  basedpyright = {},
   nixd = {},
 
   lemminx = {},

@@ -48,10 +48,7 @@ in
 
     uv
     poetry
-    pyright
-
-    dotnet-sdk_8
-    omnisharp-roslyn
+    basedpyright
 
     awscli2
 
