@@ -41,30 +41,9 @@ in
     httpie
     jrnl
 
-    # go development
-    go
-    gopls
-    delve
-
-    uv
-    poetry
-    basedpyright
-
     awscli2
 
-    yaml-language-server
-
-    stylua
-
-    nixd
-
     glab
-
-    lua-language-server
-    vue-language-server
-    typescript
-    typescript-language-server
-    tailwindcss-language-server
 
     bun
   ];
@@ -73,7 +52,6 @@ in
     NIX_PATH = "$HOME/.nix-defexpr/channels:$HOME/.nix-defexpr/channels_root";
     AWS_SDK_LOAD_CONFIG = "1";
     TERMINAL = "kitty";
-    EDITOR = "nvim";
     BROWSER = "librewolf";
     PYENV_ROOT = "$HOME/.pyenv";
     TF_LOG = "ERROR";
@@ -149,7 +127,6 @@ in
     };
 
     shellAliases = {
-      vim = "nvim";
       ssh = "kitty +kitten ssh";
       ls = "eza";
       ip = "/usr/bin/env ip -c";
@@ -216,18 +193,6 @@ in
       # SSH
       "ctrl+shift+alt+p" = "close_shared_ssh_connections";
     };
-  };
-
-
-  programs.neovim = {
-    enable = true;
-    viAlias = true;
-    vimAlias = true;
-  };
-
-  xdg.configFile."nvim" = {
-    source = ./nvim;
-    recursive = true;
   };
 
   home.file.".ideavimrc".source = ./.ideavimrc;
