@@ -1,18 +1,26 @@
 local servers = {
   -- clangd = {},
-  rust_analyzer = {},
-  -- tsserver = {},
-
-  omnisharp = {
-    cmd = { 'OmniSharp' },
+  rust_analyzer = {
     settings = {
-      Sdk = {
-        -- Specifies whether to include preview versions of the .NET SDK when
-        -- determining which version to use for project loading.
-        IncludePrereleases = true,
+      ['rust-analyzer'] = {
+        cachePriming = {
+          enable = false,
+        },
       },
     },
   },
+  -- tsserver = {},
+
+  -- omnisharp = {
+  --   cmd = { 'OmniSharp' },
+  --   settings = {
+  --     Sdk = {
+  --       -- Specifies whether to include preview versions of the .NET SDK when
+  --       -- determining which version to use for project loading.
+  --       IncludePrereleases = true,
+  --     },
+  --   },
+  -- },
 
   gopls = {},
   basedpyright = {},
@@ -58,6 +66,9 @@ local servers = {
       },
     },
   },
+
+  dartls = {},
+
   jsonls = {
     settings = {
       json = {
@@ -67,17 +78,36 @@ local servers = {
     },
   },
 
-  volar = {
-    filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue' }, -- add filetypes for typescript, javascript and vue
-    init_options = {
-      typescript = {
-        tsdk = vim.fs.dirname(vim.system({ 'which', 'tsserver' }, { text = true }):wait().stdout) .. '/../lib/node_modules/typescript/lib',
-      },
-      vue = {
-        -- disable hybrid mode
-        hybridMode = false,
+  ts_ls = {},
+
+  vtsls = {
+    filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue' },
+    settings = {
+      vtsls = {
+        tsserver = {
+          globalPlugins = {
+            {
+              name = '@vue/typescript-plugin',
+              location = vim.fs.dirname(vim.system({ 'which', 'vue-language-server' }, { text = true }):wait().stdout) .. '',
+              languages = { 'vue' },
+              configNamespace = 'typescript',
+            },
+          },
+        },
       },
     },
+  },
+  vue_ls = {
+    -- filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue' }, -- add filetypes for typescript, javascript and vue
+    -- init_options = {
+    --   typescript = {
+    --     tsdk = vim.fs.dirname(vim.system({ 'which', 'tsserver' }, { text = true }):wait().stdout) .. '/../lib/node_modules/typescript/lib',
+    --   },
+    --   vue = {
+    --     -- disable hybrid mode
+    --     hybridMode = false,
+    --   },
+    -- },
   },
 
   tailwindcss = {},
@@ -90,8 +120,8 @@ return {
     -- Useful status updates for LSP.
     { 'j-hui/fidget.nvim', opts = {} },
 
-    -- Allows extra capabilities provided by nvim-cmp
-    'hrsh7th/cmp-nvim-lsp',
+    -- Allows extra capabilities provided by blink.cmp
+    'saghen/blink.cmp',
   },
   config = function()
     --  This function gets run when an LSP attaches to a particular buffer.
@@ -122,6 +152,19 @@ return {
         -- Jump to the implementation of the word under your cursor.
         --  Useful when your language has ways of declaring types without an actual implementation.
         map('gI', require('telescope.builtin').lsp_implementations, '[G]oto [I]mplementation')
+
+        -- Fuzzy find all the symbols in your current document.
+        --  Symbols are things like variables, functions, types, etc.
+        map('gO', require('telescope.builtin').lsp_document_symbols, 'Open Document Symbols')
+
+        -- Fuzzy find all the symbols in your current workspace.
+        --  Similar to document symbols, except searches over your entire project.
+        map('gW', require('telescope.builtin').lsp_dynamic_workspace_symbols, 'Open Workspace Symbols')
+
+        -- Jump to the type of the word under your cursor.
+        --  Useful when you're not sure what type a variable is and you want to see
+        --  the definition of its *type*, not where it was *defined*.
+        map('grt', require('telescope.builtin').lsp_type_definitions, '[G]oto [T]ype Definition')
 
         -- Jump to the type of the word under your cursor.
         --  Useful when you're not sure what type a variable is and you want to see
@@ -244,13 +287,6 @@ return {
     vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
     vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
 
-    -- LSP servers and clients are able to communicate to each other what features they support.
-    --  By default, Neovim doesn't support everything that is in the LSP specification.
-    --  When you add nvim-cmp, luasnip, etc. Neovim now has *more* capabilities.
-    --  So, we create new capabilities with nvim cmp, and then broadcast that to the servers.
-    local capabilities = vim.lsp.protocol.make_client_capabilities()
-    capabilities = vim.tbl_deep_extend('force', capabilities, require('cmp_nvim_lsp').default_capabilities())
-
     -- Enable the following language servers
     --  Feel free to add/remove any LSPs that you want here. They will automatically be installed.
     --
@@ -262,8 +298,8 @@ return {
     --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
 
     for server_name, server in pairs(servers) do
-      server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
-      require('lspconfig')[server_name].setup(server)
+      vim.lsp.config(server_name, server)
+      vim.lsp.enable(server_name)
     end
   end,
 }
