@@ -5,13 +5,13 @@ return {
     build = ':TSUpdate',
     event = { 'BufReadPost', 'BufNewFile' },
 
-    cmd = { "TSUpdateSync" },
+    cmd = { 'TSUpdateSync' },
     dependencies = {
       'nvim-treesitter/nvim-treesitter-textobjects',
     },
     keys = {
       { '<c-space>', desc = 'Increment selection' },
-      { '<bs>',      desc = 'Decrement selection', mode = 'x' },
+      { '<bs>', desc = 'Decrement selection', mode = 'x' },
     },
     main = 'nvim-treesitter.configs',
 
@@ -25,6 +25,7 @@ return {
         'cpp',
         'go',
         'html',
+        'typescript',
         'javascript',
         'jsdoc',
         'json',
@@ -39,10 +40,10 @@ return {
         'regex',
         'terraform',
         'tsx',
-        'typescript',
         'vim',
         'vimdoc',
         'yaml',
+        'rust',
       },
       incremental_selection = {
         enable = true,
@@ -107,7 +108,7 @@ return {
   {
     'nvim-treesitter/nvim-treesitter-context',
     opts = {
-      max_lines = 20,          -- How many lines the window should span. Values <= 0 mean no limit.
+      max_lines = 20, -- How many lines the window should span. Values <= 0 mean no limit.
       multiline_threshold = 5, -- Maximum number of lines to show for a single context
     },
   },
