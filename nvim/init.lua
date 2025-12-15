@@ -101,9 +101,8 @@ require('lazy').setup({
   { 'folke/todo-comments.nvim', event = 'VimEnter', dependencies = { 'nvim-lua/plenary.nvim' }, opts = { signs = false } },
   require 'custom.plugins.telescope',
 
-  require 'custom.plugins.lspconfig',
-
   require 'custom.plugins.cmp',
+  require 'custom.plugins.lspconfig',
 
   require 'custom.plugins.treesitter',
 
@@ -112,6 +111,8 @@ require('lazy').setup({
 
   require 'kickstart.plugins.autoformat',
   require 'kickstart.plugins.debug',
+
+  require 'custom.plugins.gitlab',
 
   { -- Useful plugin to show you pending keybinds.
     'folke/which-key.nvim',
