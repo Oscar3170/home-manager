@@ -78,14 +78,15 @@ in
   programs.git = {
     enable = true;
 
-    userName = "Oscar Lenzi";
+    settings = {
+      user = {
+        name = "Oscar Lenzi";
+      };
+      alias = {
+        s = "status";
+        d = "diff";
+      };
 
-    aliases = {
-      s = "status";
-      d = "diff";
-    };
-
-    extraConfig = {
       pull = {
         rebase = true;
       };
