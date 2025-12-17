@@ -1,21 +1,19 @@
 { lib, ... }:
-let
-  gvariant = lib.hm.gvariant;
-in 
+with lib.hm.gvariant;
 {
   dconf.settings = {
     "org/gnome/desktop/input-sources" = {
-      current = gvariant.mkUint32 0;
+      current = mkUint32 0;
       per-window = false;
       show-all-sources = false;
-      sources = [ (gvariant.mkTuple [ "xkb" "us+altgr-intl" ]) ];
+      sources = [ (mkTuple [ "xkb" "us+altgr-intl" ]) ];
       xkb-options = [ "caps:escape" "terminate:ctrl_alt_bksp" "shift:both_capslock" "apple:alupckeys" ];
     };
 
     "org/gnome/desktop/peripherals/keyboard" = {
-      delay = gvariant.mkUint32 300;
+      delay = mkUint32 300;
       numlock-state = true;
-      repeat-interval = gvariant.mkUint32 25;
+      repeat-interval = mkUint32 25;
     };
 
     "org/gnome/desktop/peripherals/mouse" = {
@@ -126,8 +124,15 @@ in
       show-trash = false;
     };
 
-    "org/gnome/shell/extensions/dash-to-panel" = {
-      animate-appicon-hover-animation-extent = "{'RIPPLE': 4, 'PLANK': 4, 'SIMPLE': 1}";
+    "org/gnome/shell/extensions/dash-to-panel" = let
+      displays = ["PHL-AU11830002016" "LEN-0x00000000"];
+      forEachDisplayJSON = content: (builtins.toJSON (lib.genAttrs displays (name: content)));
+    in {
+      animate-appicon-hover-animation-extent = [
+        (mkDictionaryEntry["RIPPLE" 4])
+        (mkDictionaryEntry["PLANK" 4])
+        (mkDictionaryEntry["SIMPLE" 1])
+      ];
       appicon-margin = 8;
       appicon-padding = 4;
       dot-position = "BOTTOM";
@@ -136,21 +141,59 @@ in
       intellihide = false;
       leftbox-padding = -1;
       multi-monitors = false;
-      panel-anchors = ''
-        {"0":"MIDDLE","1":"MIDDLE"}
-      '';
-      panel-element-positions = ''
-        {"0":[{"element":"showAppsButton","visible":false,"position":"stackedTL"},{"element":"dateMenu","visible":true,"position":"stackedTL"},{"element":"activitiesButton","visible":false,"position":"stackedTL"},{"element":"leftBox","visible":false,"position":"stackedTL"},{"element":"taskbar","visible":true,"position":"stackedTL"},{"element":"centerBox","visible":true,"position":"stackedBR"},{"element":"rightBox","visible":true,"position":"stackedBR"},{"element":"systemMenu","visible":true,"position":"stackedBR"},{"element":"desktopButton","visible":false,"position":"stackedBR"}],"1":[{"element":"showAppsButton","visible":false,"position":"stackedTL"},{"element":"dateMenu","visible":true,"position":"stackedTL"},{"element":"activitiesButton","visible":false,"position":"stackedTL"},{"element":"leftBox","visible":false,"position":"stackedTL"},{"element":"taskbar","visible":true,"position":"stackedTL"},{"element":"centerBox","visible":true,"position":"stackedBR"},{"element":"rightBox","visible":true,"position":"stackedBR"},{"element":"systemMenu","visible":true,"position":"stackedBR"},{"element":"desktopButton","visible":false,"position":"stackedBR"}]}
-      '';
-      panel-lengths = ''
-        {"0":100,"1":100}
-      '';
-      panel-positions = ''
-        {"0":"LEFT","1":"LEFT"}
-      '';
-      panel-sizes = ''
-        {"0":54,"1":54}
-      '';
+      prefs-opened = true;
+      primary-monitor = "PHL-AU11830002016";
+      panel-anchors = forEachDisplayJSON "MIDDLE";
+      panel-element-positions = forEachDisplayJSON [
+        {
+          "element"= "showAppsButton";
+          "visible"= false;
+          "position" = "stackedTL";
+        }
+        {
+          "element" = "dateMenu";
+          "visible" = true;
+          "position" = "stackedTL";
+        }
+        {
+          "element" = "activitiesButton";
+          "visible" = false;
+          "position" = "stackedTL";
+        }
+        {
+          "element" = "leftBox";
+          "visible" = false;
+          "position" = "stackedTL";
+        }
+        {
+          "element" = "taskbar";
+          "visible" = true;
+          "position" = "stackedTL";
+        }
+        {
+          "element" = "centerBox";
+          "visible" = true;
+          "position" = "stackedBR";
+        }
+        {
+          "element" = "rightBox";
+          "visible" = true;
+          "position" = "stackedBR";
+        }
+        {
+          "element" = "systemMenu";
+          "visible" = true;
+          "position" = "stackedBR";
+        }
+        {
+          "element" = "desktopButton";
+          "visible" = false;
+          "position" = "stackedBR";
+        }
+      ];
+      panel-lengths = forEachDisplayJSON 100;
+      panel-positions = forEachDisplayJSON "LEFT";
+      panel-sizes = forEachDisplayJSON 54;
       progress-show-count = false;
       scroll-panel-action = "NOTHING";
       show-appmenu = false;
