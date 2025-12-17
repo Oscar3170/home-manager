@@ -5,9 +5,14 @@
 
   targets.genericLinux.enable = true;
 
+
   home.packages = with pkgs; [
     google-cloud-sdk
   ];
+
+  home.sessionVariables = {
+    CDP_DEPTH = "7";
+  };
 
   imports = [
     ../modules/nvim
@@ -16,5 +21,6 @@
     ../modules/gnome.nix
     ../modules/podman
     ../modules/terraform
+    ./greenpath.private.nix
   ];
 }
