@@ -1,6 +1,7 @@
 -- autoformat.lua
 return { -- Autoformat
   'stevearc/conform.nvim',
+  commit = '619363c',
   event = { 'BufWritePre' },
   cmd = { 'ConformInfo' },
   keys = {

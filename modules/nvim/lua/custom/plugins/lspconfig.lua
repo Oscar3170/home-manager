@@ -78,39 +78,42 @@ local servers = {
     },
   },
 
-  ts_ls = {},
-
-  vtsls = {
+  vue_ls = {},
+  ts_ls = {
     filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue' },
-    settings = {
-      vtsls = {
-        tsserver = {
-          globalPlugins = {
-            {
-              name = '@vue/typescript-plugin',
-              location = vim.fs.dirname(vim.system({ 'which', 'vue-language-server' }, { text = true }):wait().stdout) .. '',
-              languages = { 'vue' },
-              configNamespace = 'typescript',
-            },
-          },
+    init_options = {
+      plugins = {
+        {
+          name = '@vue/typescript-plugin',
+          location = '/home/oscar/.cache/.bun/install/global/node_modules/@vue/language-server',
+          -- location = vim.fs.dirname(vim.fs.dirname(vim.system({ 'sh', '-c', 'realpath $(which vue-language-server)' }, { text = true }):wait().stdout)) .. '',
+          languages = { 'vue' },
+          configNamespace = 'typescript',
         },
       },
     },
   },
-  vue_ls = {
-    -- filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue' }, -- add filetypes for typescript, javascript and vue
-    -- init_options = {
-    --   typescript = {
-    --     tsdk = vim.fs.dirname(vim.system({ 'which', 'tsserver' }, { text = true }):wait().stdout) .. '/../lib/node_modules/typescript/lib',
-    --   },
-    --   vue = {
-    --     -- disable hybrid mode
-    --     hybridMode = false,
-    --   },
-    -- },
-  },
 
-  tailwindcss = {},
+  -- vtsls = {
+  --   filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue' },
+  --   settings = {
+  --     vtsls = {
+  --       tsserver = {
+  --         globalPlugins = {
+  --           {
+  --             name = '@vue/typescript-plugin',
+  --             location = vim.fs.dirname(vim.fs.dirname(vim.system({ 'sh', '-c', 'realpath $(which vue-language-server)' }, { text = true }):wait().stdout))
+  --               .. '',
+  --             languages = { 'vue' },
+  --             configNamespace = 'typescript',
+  --           },
+  --         },
+  --       },
+  --     },
+  --   },
+  -- },
+
+  -- tailwindcss = {},
 }
 
 return {
@@ -118,10 +121,10 @@ return {
   'neovim/nvim-lspconfig',
   dependencies = {
     -- Useful status updates for LSP.
-    { 'j-hui/fidget.nvim', opts = {} },
+    { 'j-hui/fidget.nvim', opts = {}, commit = '82404b1' },
 
     -- Allows extra capabilities provided by blink.cmp
-    'saghen/blink.cmp',
+    { 'saghen/blink.cmp', tag = 'v1.10.2' },
   },
   config = function()
     --  This function gets run when an LSP attaches to a particular buffer.
@@ -299,7 +302,10 @@ return {
 
     for server_name, server in pairs(servers) do
       vim.lsp.config(server_name, server)
-      vim.lsp.enable(server_name)
+      if server_name ~= 'ts_ls' and server_name ~= 'vue_ls' then
+        vim.lsp.enable(server_name)
+      end
     end
+    vim.lsp.enable { 'ts_ls', 'vue_ls' }
   end,
 }

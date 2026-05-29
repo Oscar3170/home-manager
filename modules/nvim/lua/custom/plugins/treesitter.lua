@@ -2,49 +2,23 @@ return {
   {
     -- Highlight, edit, and navigate code
     'nvim-treesitter/nvim-treesitter',
+    branch = 'main',
+
     build = ':TSUpdate',
     event = { 'BufReadPost', 'BufNewFile' },
 
     cmd = { 'TSUpdateSync' },
     dependencies = {
-      'nvim-treesitter/nvim-treesitter-textobjects',
+      { 'nvim-treesitter/nvim-treesitter-textobjects', branch = 'main' },
     },
     keys = {
       { '<c-space>', desc = 'Increment selection' },
       { '<bs>', desc = 'Decrement selection', mode = 'x' },
     },
-    main = 'nvim-treesitter.configs',
+    main = 'nvim-treesitter',
 
     ---@type TSConfig
     opts = {
-      highlight = { enable = true },
-      indent = { enable = true },
-      ensure_installed = {
-        'bash',
-        'c',
-        'cpp',
-        'go',
-        'html',
-        'typescript',
-        'javascript',
-        'jsdoc',
-        'json',
-        'lua',
-        'luadoc',
-        'luap',
-        'markdown',
-        'markdown_inline',
-        'nix',
-        'python',
-        'query',
-        'regex',
-        'terraform',
-        'tsx',
-        'vim',
-        'vimdoc',
-        'yaml',
-        'rust',
-      },
       incremental_selection = {
         enable = true,
         keymaps = {
@@ -103,6 +77,49 @@ return {
       vim.opt.foldlevelstart = 99
       vim.opt.foldmethod = 'expr'
       vim.opt.foldexpr = 'nvim_treesitter#foldexpr()'
+      vim.api.nvim_create_autocmd('FileType', {
+        callback = function()
+          -- Enable treesitter highlighting and disable regex syntax
+          pcall(vim.treesitter.start)
+          -- Enable treesitter-based indentation
+          vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+        end,
+      })
+
+      local ensureInstalled = {
+        'bash',
+        'c',
+        'cpp',
+        'go',
+        'html',
+        'typescript',
+        'javascript',
+        'jsdoc',
+        'json',
+        'lua',
+        'luadoc',
+        'luap',
+        'markdown',
+        'markdown_inline',
+        'nix',
+        'python',
+        'query',
+        'regex',
+        'terraform',
+        'tsx',
+        'vim',
+        'vimdoc',
+        'yaml',
+        'rust',
+      }
+      local alreadyInstalled = require('nvim-treesitter.config').get_installed()
+      local parsersToInstall = vim
+        .iter(ensureInstalled)
+        :filter(function(parser)
+          return not vim.tbl_contains(alreadyInstalled, parser)
+        end)
+        :totable()
+      require('nvim-treesitter').install(parsersToInstall)
     end,
   },
   {

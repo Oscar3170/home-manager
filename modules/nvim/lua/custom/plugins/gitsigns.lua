@@ -5,6 +5,7 @@
 return {
   {
     'lewis6991/gitsigns.nvim',
+    commit = 'dd3f588',
     opts = {
       signs = {
         add = { text = '+' },

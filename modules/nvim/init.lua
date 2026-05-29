@@ -66,15 +66,16 @@ require('lazy').setup({
   -- NOTE: First, some plugins that don't require any configuration
 
   -- Git related plugins
-  'tpope/vim-fugitive',
-  'tpope/vim-rhubarb',
+  { 'tpope/vim-fugitive', commit = '3b753cf' },
+  { 'tpope/vim-rhubarb', commit = '5496d7c' },
 
   -- Detect tabstop and shiftwidth automatically
-  'tpope/vim-sleuth',
+  { 'tpope/vim-sleuth', commit = 'be69bff' },
 
   {
     'towolf/vim-helm',
     ft = 'helm',
+    commit = '2c8525f',
   },
 
   require 'custom.plugins.gitsigns',
@@ -82,9 +83,32 @@ require('lazy').setup({
   { -- Theme inspired by Atom
     'navarasu/onedark.nvim',
     priority = 1000,
-    config = function()
-      vim.cmd.colorscheme 'onedark'
+  },
+
+  { -- Theme inspired by the colors of the famous painting by Katsushika Hokusai.
+    'rebelot/kanagawa.nvim',
+    priority = 1000,
+    opts = {
+      tranparent = true,
+      colors = {
+        theme = {
+          all = {
+            ui = {
+              bg_gutter = 'none',
+              bg = 'none',
+            },
+          },
+        },
+      },
+    },
+    init = function()
+      vim.cmd.colorscheme 'kanagawa'
     end,
+  },
+
+  {
+    'folke/tokyonight.nvim',
+    tag = 'v4.14.1',
   },
 
   { -- Add indentation guides even on blank lines
@@ -95,10 +119,14 @@ require('lazy').setup({
     opts = {},
   },
 
-  -- "gc" to comment visual regions/lines
-  { 'numToStr/Comment.nvim', opts = {} },
+  {
+    'folke/todo-comments.nvim',
+    commit = 'e30b7f2',
+    event = 'VimEnter',
+    dependencies = { 'nvim-lua/plenary.nvim' },
+    opts = { signs = false },
+  },
 
-  { 'folke/todo-comments.nvim', event = 'VimEnter', dependencies = { 'nvim-lua/plenary.nvim' }, opts = { signs = false } },
   require 'custom.plugins.telescope',
 
   require 'custom.plugins.cmp',
@@ -106,16 +134,17 @@ require('lazy').setup({
 
   require 'custom.plugins.treesitter',
 
-  { 'fladson/vim-kitty' },
-  { 'b0o/schemastore.nvim' },
+  { 'fladson/vim-kitty', commit = 'cd72f2d' },
+  { 'b0o/schemastore.nvim', commit = 'd09eb13' },
 
   require 'kickstart.plugins.autoformat',
-  require 'kickstart.plugins.debug',
+  -- require 'kickstart.plugins.debug',
 
   require 'custom.plugins.gitlab',
 
   { -- Useful plugin to show you pending keybinds.
     'folke/which-key.nvim',
+    commit = '3aab214',
     event = 'VimEnter', -- Sets the loading event to 'VimEnter'
     opts = {
       -- delay between pressing a key and opening which-key (milliseconds)
@@ -140,8 +169,8 @@ require('lazy').setup({
 
   { -- VimTex
     'lervag/vimtex',
-    lazy = false, -- we don't want to lazy load VimTeX
-    -- tag = "v2.15", -- uncomment to pin to a specific release
+    lazy = false, -- we don't want to lazy load VimTeX, it already lazy loads itself
+    tag = 'v2.17', -- uncomment to pin to a specific release
     init = function()
       -- VimTeX configuration goes here, e.g.
       vim.g.vimtex_view_method = 'general'
@@ -150,8 +179,19 @@ require('lazy').setup({
     end,
   },
 
+  {
+    'MeanderingProgrammer/render-markdown.nvim',
+    tag = 'v8.12.0',
+    dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-mini/mini.nvim' }, -- if you use the mini.nvim suite
+    -- dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-mini/mini.icons' },        -- if you use standalone mini plugins
+    -- dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' }, -- if you prefer nvim-web-devicons
+    ---@module 'render-markdown'
+    ---@type render.md.UserConfig
+    opts = {},
+  },
+
   { -- Collection of various small independent plugins/modules
-    'echasnovski/mini.nvim',
+    'nvim-mini/mini.nvim',
     config = function()
       -- Better Around/Inside textobjects
       --
