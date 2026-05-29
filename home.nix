@@ -23,15 +23,17 @@ in
   xdg.mime.enable = isLinux;
   xdg.mimeApps.enable = isLinux;
 
+  fonts.fontconfig.enable = true;
+
   home.packages = with pkgs; [
     nerd-fonts.dejavu-sans-mono   
+    pkgs.nerd-fonts.blex-mono
 
     pre-commit
     direnv
 
     opencode
 
-    # noisetorch
     bat
     fd
     ripgrep
@@ -54,7 +56,6 @@ in
   home.sessionVariables = {
     NIX_PATH = "$HOME/.nix-defexpr/channels:$HOME/.nix-defexpr/channels_root";
     AWS_SDK_LOAD_CONFIG = "1";
-    TERMINAL = "kitty";
     BROWSER = "librewolf";
     PYENV_ROOT = "$HOME/.pyenv";
     TF_LOG = "ERROR";
@@ -135,7 +136,6 @@ in
     };
 
     shellAliases = {
-      ssh = "kitty +kitten ssh";
       ls = "eza";
       ip = "/usr/bin/env ip -c";
       batlog = "bat --color=always --theme=\"Solarized (light)\" -l log --wrap never -pp";
@@ -147,7 +147,6 @@ in
 
     plugins = [
       { name = "tide"; src = pkgs.fishPlugins.tide.src; }
-      # { name = "foreign-env"; src = pkgs.fishPlugins.foreign-env.src; }
       { name = "done"; src = pkgs.fishPlugins.done.src; }
     ];
   };
@@ -159,55 +158,6 @@ in
   xdg.configFile."fish/completions" = {
     source = ./fish/completions;
     recursive = true;
-  };
-
-  xdg.configFile."kitty" = {
-    source = ./kitty;
-    recursive = true;
-  };
-
-  programs.kitty = {
-    enable = false;
-
-    package = null;
-
-    font = {
-      size = 11;
-      name = "DejaVuSansM";
-      package = pkgs.nerd-fonts.dejavu-sans-mono;
-    };
-    settings = {
-      "scrollback_lines" = 50000;
-
-      "background_tint" = 5;
-      "background_opacity" = "0.97";
-      "dynamic_background_opacity" = true;
-
-      "touch_scroll_multiplier" = 6;
-      "linux_display_manager" = "wayland";
-      "wayland_titlebar_color" = "background";
-    };
-    shellIntegration = {
-      mode = "no-cursor";
-      enableFishIntegration = true;
-    };
-    keybindings = {
-      # Launch windows
-      "ctrl+alt+enter" = "launch";
-      "ctrl+shift+enter" = "launch --cwd=current";
-      "ctrl+shift+n" = "launch --cwd=current --type os-window";
-
-      # Launch tabs
-      "ctrl+shift+t" = "launch --type=tab --cwd=current";
-      "ctrl+alt+t" = "launch --type=tab";
-
-      # Layouts
-      "ctrl+shift+l" = "next_layout";
-      "ctrl+shift+r" = "start_resizing_window";
-
-      # SSH
-      "ctrl+shift+alt+p" = "close_shared_ssh_connections";
-    };
   };
 
   home.file.".ideavimrc".source = ./.ideavimrc;

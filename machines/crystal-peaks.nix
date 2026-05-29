@@ -10,6 +10,8 @@
   ];
 
   imports = [
+    ../modules/nvim
+    ../modules/kitty
     ../modules/kubernetes
     # ../modules/librewolf
     # ../modules/gnome.nix
