@@ -125,7 +125,7 @@ with lib.hm.gvariant;
     };
 
     "org/gnome/shell/extensions/dash-to-panel" = let
-      displays = ["PHL-AU11830002016" "LEN-0x00000000"];
+      displays = ["PHL-AU11830002016" "LEN-0x00000000" "DEL-FD2X5T2" "0" "1"];
       forEachDisplayJSON = content: (builtins.toJSON (lib.genAttrs displays (name: content)));
     in {
       animate-appicon-hover-animation-extent = [
@@ -142,7 +142,7 @@ with lib.hm.gvariant;
       leftbox-padding = -1;
       multi-monitors = false;
       prefs-opened = true;
-      primary-monitor = "PHL-AU11830002016";
+      # primary-monitor = "0";
       panel-anchors = forEachDisplayJSON "MIDDLE";
       panel-element-positions = forEachDisplayJSON [
         {

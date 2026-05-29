@@ -29,6 +29,8 @@ in
     pre-commit
     direnv
 
+    opencode
+
     # noisetorch
     bat
     fd
@@ -46,6 +48,7 @@ in
     glab
 
     bun
+    pnpm
   ];
 
   home.sessionVariables = {
@@ -96,6 +99,10 @@ in
       init = {
         defaultBranch = "main";
       };
+
+      core = {
+        hooksPath = "/dev/null";
+      };
     };
   };
 
@@ -140,7 +147,7 @@ in
 
     plugins = [
       { name = "tide"; src = pkgs.fishPlugins.tide.src; }
-      { name = "foreign-env"; src = pkgs.fishPlugins.foreign-env.src; }
+      # { name = "foreign-env"; src = pkgs.fishPlugins.foreign-env.src; }
       { name = "done"; src = pkgs.fishPlugins.done.src; }
     ];
   };
@@ -162,10 +169,12 @@ in
   programs.kitty = {
     enable = false;
 
+    package = null;
+
     font = {
       size = 11;
-      name = "DejaVuSansMono";
-      package = (pkgs.nerdfonts.override { fonts = [ "DejaVuSansMono" ]; });
+      name = "DejaVuSansM";
+      package = pkgs.nerd-fonts.dejavu-sans-mono;
     };
     settings = {
       "scrollback_lines" = 50000;
@@ -183,9 +192,14 @@ in
       enableFishIntegration = true;
     };
     keybindings = {
+      # Launch windows
       "ctrl+alt+enter" = "launch";
       "ctrl+shift+enter" = "launch --cwd=current";
       "ctrl+shift+n" = "launch --cwd=current --type os-window";
+
+      # Launch tabs
+      "ctrl+shift+t" = "launch --type=tab --cwd=current";
+      "ctrl+alt+t" = "launch --type=tab";
 
       # Layouts
       "ctrl+shift+l" = "next_layout";
