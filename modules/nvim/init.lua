@@ -67,7 +67,7 @@ require('lazy').setup({
 
   -- Git related plugins
   { 'tpope/vim-fugitive', commit = '3b753cf' },
-  { 'tpope/vim-rhubarb', commit = '5496d7c' },
+  { 'tpope/vim-dadbod', commit = '6d1d41d' },
 
   -- Detect tabstop and shiftwidth automatically
   { 'tpope/vim-sleuth', commit = 'be69bff' },
@@ -187,7 +187,11 @@ require('lazy').setup({
     -- dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' }, -- if you prefer nvim-web-devicons
     ---@module 'render-markdown'
     ---@type render.md.UserConfig
-    opts = {},
+    opts = {
+      latex = {
+        enabled = false,
+      },
+    },
   },
 
   { -- Collection of various small independent plugins/modules

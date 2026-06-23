@@ -8,6 +8,7 @@
 
   home.packages = with pkgs; [
     google-cloud-sdk
+    postgresql
   ];
 
   home.sessionVariables = {
