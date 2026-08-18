@@ -125,7 +125,7 @@ with lib.hm.gvariant;
     };
 
     "org/gnome/shell/extensions/dash-to-panel" = let
-      displays = ["PHL-AU11830002016" "LEN-0x00000000" "DEL-FD2X5T2" "0" "1"];
+      displays = ["PHL-AU11830002016" "LEN-0x00000000" "DEL-FD2X5T2" "AUS-R8LMTF016672"];
       forEachDisplayJSON = content: (builtins.toJSON (lib.genAttrs displays (name: content)));
     in {
       animate-appicon-hover-animation-extent = [
@@ -133,16 +133,25 @@ with lib.hm.gvariant;
         (mkDictionaryEntry["PLANK" 4])
         (mkDictionaryEntry["SIMPLE" 1])
       ];
-      appicon-margin = 8;
-      appicon-padding = 4;
+      appicon-margin = 1;
+      appicon-padding = 12;
+      appicon-style = "GRAYSCALE";
+      click-action = "CYCLE";
       dot-position = "BOTTOM";
+      dot-size = 4;
+      dot-style-focused = "DOTS";
+      dot-style-unfocused = "DOTS";
+      focus-highlight-color = "#eeeeee";
+      focus-highlight-dominant = false;
+      focus-highlight-opacity = 20;
+      global-border-radius = 0;
+      group-apps = true;
       hide-overview-on-startup = true;
       hotkeys-overlay-combo = "TEMPORARILY";
       intellihide = false;
+      leave-timeout = 25;
       leftbox-padding = -1;
       multi-monitors = false;
-      prefs-opened = true;
-      # primary-monitor = "0";
       panel-anchors = forEachDisplayJSON "MIDDLE";
       panel-element-positions = forEachDisplayJSON [
         {
@@ -168,7 +177,7 @@ with lib.hm.gvariant;
         {
           "element" = "taskbar";
           "visible" = true;
-          "position" = "stackedTL";
+          "position" = "centered";
         }
         {
           "element" = "centerBox";
@@ -194,21 +203,27 @@ with lib.hm.gvariant;
       panel-lengths = forEachDisplayJSON 100;
       panel-positions = forEachDisplayJSON "LEFT";
       panel-sizes = forEachDisplayJSON 54;
+      prefs-opened = true;
       progress-show-count = false;
       scroll-panel-action = "NOTHING";
       show-appmenu = false;
       show-apps-icon-file = "";
-      show-favorites = false;
-      show-running-apps = false;
+      show-favorites = true;
+      show-running-apps = true;
       show-tooltip = false;
-      show-window-previews = false;
+      show-window-previews = true;
       # status-icon-padding = -1;
       stockgs-keep-dash = true;
       stockgs-panelbtn-click-only = true;
+      trans-use-border = false;
       trans-use-custom-bg = false;
       trans-use-custom-gradient = false;
       tray-padding = -1;
+      window-preview-animation-time = 50;
+      window-preview-custom-icon-size = 8;
+      window-preview-show-title = true;
       window-preview-title-position = "TOP";
+      window-preview-use-custom-icon-size = false;
     };
 
     "org/gnome/shell/extensions/date-menu-formatter" = {
