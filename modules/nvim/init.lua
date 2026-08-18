@@ -43,6 +43,7 @@ vim.g.maplocalleader = ' '
 
 require 'custom.set'
 require 'custom.mappings'
+require 'custom.glab'
 
 -- Install package manager
 --    https://github.com/folke/lazy.nvim
