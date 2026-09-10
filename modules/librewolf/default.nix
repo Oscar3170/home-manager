@@ -15,10 +15,10 @@ in
 
   home.activation.librewolfLinkUserChrome =
     lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-      export IFS=$'\n'
-      for profile in $(find "${profilesPath}" -maxdepth 2 -name "storage.sqlite" | sed -e 's/\/storage.sqlite//g'); do
-        ln -sfT "$HOME/.librewolf/chrome" "$profile/chrome"
-      done
+      find "${profilesPath}" -maxdepth 2 -name storage.sqlite -print0 |
+        while IFS= read -r -d "" db; do
+          ln -sfT "$HOME/.librewolf/chrome" "''${db%/storage.sqlite}/chrome"
+        done
     '';
 
   home.sessionVariables = {
