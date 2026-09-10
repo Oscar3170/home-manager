@@ -73,6 +73,11 @@ require('lazy').setup({
   { 'tpope/vim-sleuth', commit = 'be69bff' },
 
   {
+    'oscar3170/nvim-glab-ci',
+    cmd = 'GlabCI',
+  },
+
+  {
     'towolf/vim-helm',
     ft = 'helm',
     commit = '2c8525f',
