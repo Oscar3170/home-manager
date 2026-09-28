@@ -1,3 +1,12 @@
+# Home Manager Configuration
+
+
+
+Applying the configuration:
+```bash
+home-manager switch -b backup
+```
+
 # Installation
 
 ``` bash
@@ -17,11 +26,3 @@ nix-shell '<home-manager>' -A install
 # Run home-manager config
 fish -c 'home-manager switch'
 ```
-
-## Librewolf
-TODO: add to script
-``` bash
-ln -s ~/.mozilla/native-messaging-hosts ~/.librewolf/native-messaging-hosts
-sudo ln -s /usr/lib/mozilla/native-messaging-hosts /usr/lib/librewolf/native-messaging-hosts
-```
-
