@@ -57,7 +57,6 @@ in
     NIX_PATH = "$HOME/.nix-defexpr/channels:$HOME/.nix-defexpr/channels_root";
     AWS_SDK_LOAD_CONFIG = "1";
     PYENV_ROOT = "$HOME/.pyenv";
-    TF_LOG = "ERROR";
     DOTNET_CLI_TELEMETRY_OPTOUT = "true";
   };
 

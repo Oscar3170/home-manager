@@ -5,7 +5,8 @@
     tofu-ls
   ];
 
-  programs.fish.shellAbbrs.tf = "tofu";
+  # programs.fish.shellAbbrs.tf = "tofu";
+  home.sessionVariables.TF_LOG = "ERROR";
 
   xdg.configFile."opentofu/tofurc".source = ./tofurc;
 
