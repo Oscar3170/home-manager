@@ -12,7 +12,6 @@
 
   home.file = {
     ".local/share/terraform/plugin-cache/.keep".text = "";
-    ".local/bin/terraform".source = "${pkgs.opentofu}/bin/tofu";
   };
 
 }
