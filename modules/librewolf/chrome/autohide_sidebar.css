@@ -17,7 +17,10 @@ See the above repository for updates as well as full license text. */
   max-width: var(--uc-sidebar-width) !important;
   z-index: var(--browser-area-z-index-sidebar,2);
 }
-#sidebar-box[sidebar-positionend]{ direction: rtl }
+#sidebar-box[sidebar-positionend]{ 
+  direction: rtl;
+  --space-small: 0;
+}
 #sidebar-box[sidebar-positionend] > *{ direction: ltr }
 
 #sidebar-box[sidebar-positionend]:-moz-locale-dir(rtl){ direction: ltr }
@@ -25,7 +28,10 @@ See the above repository for updates as well as full license text. */
 
 #main-window[sizemode="fullscreen"] #sidebar-box{ --uc-sidebar-width: 1px; }
 
-#sidebar-splitter{ display: none }
+#sidebar-panel-header,
+#sidebar-splitter{ 
+  display: none;
+}
 
 #sidebar-header{
   overflow: hidden;
