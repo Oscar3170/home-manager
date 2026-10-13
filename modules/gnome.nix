@@ -202,7 +202,7 @@ with lib.hm.gvariant;
       ];
       panel-lengths = forEachDisplayJSON 100;
       panel-positions = forEachDisplayJSON "LEFT";
-      panel-sizes = forEachDisplayJSON 54;
+      panel-sizes = forEachDisplayJSON 56;
       prefs-opened = true;
       progress-show-count = false;
       scroll-panel-action = "NOTHING";
