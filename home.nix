@@ -33,6 +33,7 @@ in
     direnv
 
     opencode
+    pi-coding-agent
 
     bat
     fd
@@ -130,7 +131,6 @@ in
       kbat = "bat -plyaml";
       rmr = "rm -r";
       cat = "bat -pp";
-      apt = "aptitude";
     };
 
     shellAliases = {
@@ -140,6 +140,7 @@ in
       kctx = "kubectl config use-context";
       kubens = "kubectl config set-context --current --namespace";
       watch-pods = "watch -tcn1 kubectl watch";
+      vimmd = "vim -c 'set spell ft=markdown spelllang=pt_br'";
     };
 
 
