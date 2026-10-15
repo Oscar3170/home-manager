@@ -82,6 +82,20 @@
     ../modules/kubernetes
     ../modules/librewolf
     ../modules/terraform
-    ./PS-STFA080-00881.private.nix
-  ];
+  ] ++ (
+    # Private per-machine config is git-ignored on purpose. Note that git-based
+    # flake refs only see git-tracked files, so it would be silently missing
+    # from the flake source even when present on disk.
+    if builtins.pathExists ./PS-STFA080-00881.private.nix
+    then [ ./PS-STFA080-00881.private.nix ]
+    else throw ''
+      machines/PS-STFA080-00881.private.nix is not present in the flake source.
+      If the file exists on disk: git-based flake refs (plain `home-manager
+      switch`) hide git-ignored files. Either apply with
+        home-manager switch -b backup --flake path:.
+      or expose the file to git with
+        git add -f machines/PS-STFA080-00881.private.nix
+      Otherwise, create machines/PS-STFA080-00881.private.nix on this machine first.
+    ''
+  );
 }

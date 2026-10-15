@@ -1,14 +1,18 @@
 { config, lib, pkgs, ... }:
 
 let
-  hostname = builtins.replaceStrings [ "\n" ] [ "" ] (builtins.readFile /etc/hostname);
-  machine_config = if builtins.pathExists ./machines/${hostname}.nix then ./machines/${hostname}.nix else ./machines/default.nix;
-  isLinux = builtins.match ".*-linux" builtins.currentSystem == [ ];
+  # Pure (flake) evaluation forbids builtins.currentSystem; derive it from pkgs.
+  isLinux = pkgs.stdenv.hostPlatform.isLinux;
+
+  homeManagerWrapper = pkgs.writeScriptBin "home-manager" (lib.replaceStrings
+    [ "#!/usr/bin/env bash" "@home-manager@" "@realpath@" ]
+    [ "#!${pkgs.bash}/bin/bash" "${config.programs.home-manager.package}" "${pkgs.coreutils}/bin/realpath" ]
+    (builtins.readFile ./scripts/home-manager.sh));
 in
 {
-  imports = [
-    machine_config
-  ];
+  # Per-machine configuration (home.username, home.homeDirectory, module
+  # imports) is selected by hostname in flake.nix and passed in as an extra
+  # module.
 
   # This value determines the Home Manager release that your configuration is
   # compatible with. This helps avoid breakage when a new Home Manager release
@@ -26,6 +30,9 @@ in
   fonts.fontconfig.enable = true;
 
   home.packages = with pkgs; [
+    # Use the wrapper even when the Nix profile precedes ~/.local/bin in PATH.
+    (lib.hiPrio homeManagerWrapper)
+
     nerd-fonts.dejavu-sans-mono   
     pkgs.nerd-fonts.blex-mono
 

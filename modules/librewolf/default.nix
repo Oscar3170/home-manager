@@ -1,6 +1,7 @@
 { config, lib, pkgs, ... }:
 let
-  profilesPath = if builtins.currentSystem == "aarch64-darwin" then
+  # Pure (flake) evaluation forbids builtins.currentSystem; derive it from pkgs.
+  profilesPath = if pkgs.stdenv.hostPlatform.isDarwin then
     "$HOME/Library/Application Support/librewolf/Profiles/"
   else
     "$HOME/.librewolf/";
