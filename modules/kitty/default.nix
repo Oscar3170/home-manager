@@ -24,6 +24,7 @@
       wayland_titlebar_color = "background";
 
       copy_on_select = true;
+      strip_trailing_spaces = "smart";
 
       enabled_layouts = "fat:bias=50;full_size=1;mirrored=true,*";
 

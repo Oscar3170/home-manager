@@ -22,6 +22,7 @@ in
   # want to update the value, then make sure to first check the Home Manager
   # release notes.
   home.stateVersion = "23.05";
+  home.backupFileExtension = "backup";
 
   xdg.enable = isLinux;
   xdg.mime.enable = isLinux;

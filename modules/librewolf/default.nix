@@ -16,11 +16,11 @@ in
 
   # Route external links through a chooser when several LibreWolf profiles are
   # open at once; with one profile open the link goes straight there.
-  home.file.".local/bin/librewolf-profile-open.sh" = lib.mkIf pkgs.stdenv.isLinux {
+  home.file.".local/bin/librewolf-profile-open.sh" = lib.mkIf pkgs.stdenv.hostPlatform.isLinux {
     source = ./librewolf-profile-open.sh;
   };
 
-  xdg.desktopEntries.librewolf-profile-open = lib.mkIf pkgs.stdenv.isLinux {
+  xdg.desktopEntries.librewolf-profile-open = lib.mkIf pkgs.stdenv.hostPlatform.isLinux {
     name = "LibreWolf Profile Chooser";
     genericName = "Web Browser";
     comment = "Open links in an already-running LibreWolf profile, asking which one when several are open";
