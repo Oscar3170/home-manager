@@ -24,6 +24,13 @@ vim.opt.mouse = ''
 --  See `:help 'clipboard'`
 vim.opt.clipboard = 'unnamedplus'
 
+-- Let Nvim talk to the terminal directly with OSC 52 over SSH connections,
+-- so copy/paste goes through kitty on the machine you are actually looking at.
+-- See `:help clipboard-osc52`.
+if vim.env.SSH_CONNECTION or vim.env.SSH_TTY then
+  vim.g.clipboard = 'osc52'
+end
+
 -- Enable break indent
 vim.opt.breakindent = true
 
