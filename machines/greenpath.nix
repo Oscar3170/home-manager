@@ -20,6 +20,7 @@
     ../modules/gnome.nix
     ../modules/podman
     ../modules/terraform
+    ../modules/tmux
   ] ++ (
     # Private per-machine config is git-ignored on purpose. Note that git-based
     # flake refs only see git-tracked files, so it would be silently missing

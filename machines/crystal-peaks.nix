@@ -14,5 +14,6 @@
     # ../modules/gnome.nix
     # ../modules/podman
     ../modules/terraform
+    ../modules/tmux
   ];
 }
